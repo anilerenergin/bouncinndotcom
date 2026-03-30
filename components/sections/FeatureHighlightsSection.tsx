@@ -26,7 +26,6 @@ export function FeatureHighlightsSection() {
       <div className="space-y-24 md:space-y-32">
         {/* Layout 1: Left/Right Standard for Promoter Management */}
         <FadeInSection className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 relative">
-          <div className="absolute top-1/2 left-0 w-96 h-96 bg-live-red/10 blur-[150px] -z-10 rounded-full mix-blend-screen pointer-events-none overflow-hidden" />
           <div className="flex-1 space-y-4 md:space-y-6 flex flex-col items-center lg:items-start text-center lg:text-left mx-auto">
             <div className="inline-flex w-14 h-14 bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl items-center justify-center mb-2 md:mb-4 shadow-[0_4px_24px_rgba(255,72,72,0.15)]">
                <svg className="w-7 h-7 text-white/90" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
@@ -51,11 +50,10 @@ export function FeatureHighlightsSection() {
         {/* Layout 2: Wide Full Card for Promotion Engine */}
         <FadeInSection className="max-w-6xl mx-auto !py-0">
           <motion.div 
-            whileHover={{ y: -5 }}
+            whileHover={{ y: -5, boxShadow: "0 8px 32px rgba(0,0,0,0.6), 0 0 80px rgba(255,72,72,0.18)" }}
             transition={{ type: "spring", bounce: 0.4 }}
             className="bg-white/[0.02] backdrop-blur-3xl rounded-[2.5rem] md:rounded-[3rem] p-8 md:p-12 lg:p-20 border border-white/[0.08] relative overflow-hidden text-center group shadow-[0_8px_32px_0_rgba(0,0,0,0.6)]"
           >
-            <div className="absolute top-0 right-0 w-96 h-96 bg-live-red/20 blur-[150px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
             
             <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-4 relative z-10">{t('feat_promo_title')}</h2>
             <h3 className="text-xl font-bold text-live-red mb-6 md:mb-8 relative z-10">{t('feat_promo_sub')}</h3>
@@ -74,11 +72,10 @@ export function FeatureHighlightsSection() {
         {/* Layout 3: Wide Full Card for Precision Targeting */}
         <FadeInSection className="max-w-6xl mx-auto !py-0">
           <motion.div 
-            whileHover={{ y: -5 }}
+            whileHover={{ y: -5, boxShadow: "0 8px 32px rgba(0,0,0,0.6), 0 0 80px rgba(255,72,72,0.15)" }}
             transition={{ type: "spring", bounce: 0.4 }}
             className="bg-white/[0.02] backdrop-blur-3xl rounded-[3rem] p-12 lg:p-20 border border-white/[0.08] relative overflow-hidden text-center group shadow-[0_8px_32px_0_rgba(0,0,0,0.6)]"
           >
-            <div className="absolute top-0 left-0 w-96 h-96 bg-live-red/15 blur-[150px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
             
             <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-4 relative z-10">{t('feat_target_title')}</h2>
             <h3 className="text-xl font-bold text-live-red mb-8 relative z-10">{t('feat_target_sub')}</h3>
