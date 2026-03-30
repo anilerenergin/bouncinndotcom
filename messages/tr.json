@@ -1,63 +1,64 @@
 {
   "Index": {
-    "nav_app": "APP",
+    "nav_app": "UYGULAMA",
     "nav_crm": "CRM",
     "nav_contact": "İLETİŞİM",
 
     "hero_title": "Bouncinn Nedir?",
-    "hero_subtitle": "Bouncinn, sizi aynı odadaki insanlarla eşleştirerek paylaşılan mekanları anında, gerçek hayattaki bağlantılara dönüştüren etkinlik tabanlı bir sosyal uygulamadır.",
+    "hero_subtitle": "Bouncinn, aynı mekândaki insanları anında birbirine bağlayan etkinlik temelli bir sosyal uygulama. Ortak ortamları gerçek hayattaki samimi bağlantılara dönüştürüyor.",
 
-    "how_title": "Nasıl çalışır?",
-    "how_step1": "Etkinliğini bul",
-    "how_step2": "Check-in yap",
-    "how_step3": "İnsanlarla tanış",
+    "how_title": "Nasıl Çalışır?",
+    "how_step1": "Etkinliğini Bul",
+    "how_step2": "Check-in Yap",
+    "how_step3": "Tanış ve Bağlan",
 
-    "realtime_title": "Gerçek Zamanlı Bağlam",
-    "realtime_desc": "Gece hayatını anbean keşfedin. Kimin nerede olduğunu görün, en iyi atmosferi bulun ve aynı mekandaki insanlarla anında bağlantı kurun.",
+    "realtime_title": "Anlık Gece Hayatı",
+    "realtime_desc": "Geceyi olduğu gibi, canlı canlı yaşa. Kimin nerede olduğunu gör, en yüksek enerjiyi yakala ve aynı mekândaki insanlarla hemen sohbete başla.",
 
-    "promo_app_title": "Özel Ödüllerin Kilidini Açın",
-    "promo_app_sub": "Geceniz Ödüllendirilsin.",
-    "promo_app_desc": "Bouncinn uygulamasında özel promosyonları, ücretsiz içecekleri ve VIP erişimlerini keşfedin. En iyi mekanlarda eğlendikçe sadakatiniz gerçek ödüllere dönüşsün.",
+    "promo_app_title": "Özel Ayrıcalıkların Kapısını Arala",
+    "promo_app_sub": "Gecen Ödüllendirilsin.",
+    "promo_app_desc": "Bouncinn uygulamasıyla özel kampanyaları, bedava ikramları ve VIP fırsatlarını keşfet. En iyi mekanlarda gezdikçe sadakatin gerçek ayrıcalıklara dönüşsün.",
 
-    "quote_text": "\"Dijital flörtleşme bozuldu: bitmek bilmeyen ekran kaydırmalarından ve ekranla gerçek dünya arasındaki boşluktan yorulduk.\"",
-    "quote_sub": "Ruhumuzu geri getirdik.",
+    "quote_text": "\"Dijital tanışma kültürü bitti, yorulduk. Sürekli kaydırma ve ekranla gerçek hayat arasındaki o boşluk artık çok sıkıyor.\"",
+    "quote_sub": "Gerçek bağlantıyı yeniden biz getirdik.",
 
     "feat_promoter_title": "Promoter Yönetimi",
-    "feat_promoter_sub": "Gerçek Zamanlı Promoter Analizleri",
-    "feat_promoter_desc": "Hangi promoterin kaç bilet sattığını veya kaç misafir getirdiğini gerçek zamanlı izleyerek PR stratejinizi veriye dayalı içgörülerle optimize edin.",
+    "feat_promoter_sub": "Gerçek Zamanlı Promoter Analitiği",
+    "feat_promoter_desc": "Hangi promoter kaç bilet sattı, kaç guest getirdi anlık olarak takip et. PR stratejini veriye dayalı gerçek içgörülerle güçlendir.",
 
     "feat_promo_title": "Promosyon Motoru",
-    "feat_promo_sub": "Doğrudan Tüketiciye Yönelik Kampanyalar",
-    "feat_promo_desc": "Yüksek etkili mobil kampanyalar ve kişiselleştirilmiş bildirimler aracılığıyla son kullanıcıya doğrudan ulaşın.",
+    "feat_promo_sub": "Kullanıcıya Doğrudan Ulaşan Kampanyalar",
+    "feat_promo_desc": "Yüksek etkili mobil kampanyalar ve kişiselleştirilmiş bildirimlerle son kullanıcıya tam zamanında ve direkt ulaş.",
 
     "feat_target_title": "Hassas Hedefleme",
-    "feat_target_sub": "Doğrudan Tüketiciye Yönelik Kampanyalar",
-    "feat_target_desc": "Entegre PR ve etkinlik verilerini kullanarak hedef kitlenizi tanımlayın. Sadece 'daha fazla' kişiye değil, doğru kişilere ulaşın.",
+    "feat_target_sub": "Doğru Kişiye, Doğru Anda",
+    "feat_target_desc": "PR ve etkinlik verilerini birleştirerek hedef kitleni net bir şekilde belirle. Daha fazla kişiye değil, tam doğru kişilere ulaş.",
 
-    "feat_analytics_title": "Analitik Dashboard",
-    "feat_analytics_sub": "Mekan büyümesi için gerçek zamanlı içgörüler",
-    "feat_analytics_desc": "Promosyonları, fiyatlandırmayı ve kapasiteyi optimize etmek için verileri kullanın. Mekanınıza kimlerin katıldığını, demografik özelliklerini ve ziyaret modellerini belirleyin.",
+    "feat_analytics_title": "Analitik Paneli",
+    "feat_analytics_sub": "Mekan büyümesi için anlık içgörüler",
+    "feat_analytics_desc": "Promosyonları, fiyatları ve kapasiteyi optimize etmek için veriden faydalan. Guestlerin demografisini, ziyaret alışkanlıklarını, check-in’leri ve etkinlik popülerliğini gerçek zamanlı takip et.",
 
-    "feat_guest_title": "Misafir Yönetimi",
-    "feat_guest_sub": "Mekanlar için akıllı misafir listesi ve check-in yönetimi",
-    "feat_guest_desc": "PR kanallarından devasa miktarda veri topluyorsunuz, ancak bunu uygulanabilir stratejilere dönüştürmekte zorlanıyorsunuz.",
+    "feat_guest_title": "Guest Yönetimi",
+    "feat_guest_sub": "Mekanlar için akıllı liste ve check-in çözümü",
+    "feat_guest_desc": "PR kanallarından tonla veri topluyorsun ama bunları uygulanabilir stratejilere çevirmekte zorlanıyorsun. Biz bunu kolaylaştırıyoruz.",
 
-    "security_title": "Güvenlik, kontrol ve ölçeklenebilirlik düşünülerek tasarlandı",
+    "security_title": "Güvenlik, kontrol ve ölçeklenebilirlik ön planda",
     "security_1": "%100 özel mekan veri tabanı",
     "security_2": "White-label ve API entegrasyonları",
-    "security_3": "Güvenli ve ölçeklenebilir altyapı",
+    "security_3": "Güvenli ve güçlü altyapı",
 
-    "cta_big": "Bounce in Bouncinn",
-    "cta_why": "Neden biz?",
+    "cta_big": "Bouncinn’de Bounce Yap",
+    "cta_why": "Neden Biz?",
     "cta_lets": "Hadi Konuşalım",
+    "cta_desc": "Mekanının dijital varlığını bir üst seviyeye taşımaya hazır mısın? Bouncinn’in güçlü CRM çözümü ve gece hayatı ağını seninle buluşturmak için buradayız.",
 
     "contact_form_title": "Görüşelim",
-    "contact_form_desc": "Sorularınız mı var? Bize yazın.",
+    "contact_form_desc": "Soruların mı var? Bize yaz, hemen dönelim.",
     "contact_name": "Ad Soyad",
     "contact_email": "E-posta",
-    "contact_message": "Mesaj",
+    "contact_message": "Mesajın",
     "contact_submit": "Gönder",
-    "contact_success_title": "Mesaj Gönderildi",
-    "contact_success_desc": "Size en kısa sürede dönüş yapacağız."
+    "contact_success_title": "Mesajın İletildi!",
+    "contact_success_desc": "En kısa sürede sana geri döneceğiz."
   }
 }

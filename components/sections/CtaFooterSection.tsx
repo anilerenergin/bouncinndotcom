@@ -23,7 +23,7 @@ export function CtaFooterSection() {
          <div className="max-w-2xl mx-auto flex flex-col items-center justify-center text-center">
             <h2 className="text-4xl md:text-7xl font-black mb-4 md:mb-6">{t('cta_lets')}</h2>
             <p className="text-lg md:text-xl text-white/50 mb-10 md:mb-12 max-w-lg">
-              Ready to elevate your venue's digital presence? We're here to help you integrate Bouncinn's cutting-edge CRM and nightlife network.
+              {t('cta_desc')}
             </p>
             
             <div className="w-full">
