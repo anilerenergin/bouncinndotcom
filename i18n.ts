@@ -8,7 +8,7 @@ export default getRequestConfig(async ({requestLocale}) => {
   
   // Validate that the incoming `locale` parameter is valid
   if (!locales.includes(locale as any)) {
-    locale = 'tr';
+    locale = 'en';
   }
 
   return {
