@@ -1,0 +1,63 @@
+{
+  "Index": {
+    "nav_app": "APP",
+    "nav_crm": "CRM",
+    "nav_contact": "CONTACT",
+
+    "hero_title": "What is Bouncinn",
+    "hero_subtitle": "Bouncinn is an event-based social app that matches you with people in the same room, turning shared venues into instant, real-life connections.",
+
+    "how_title": "How it works",
+    "how_step1": "Find your event",
+    "how_step2": "Make your check-in",
+    "how_step3": "Meet the people",
+
+    "realtime_title": "Real-Time Context",
+    "realtime_desc": "Explore the nightlife scene as it unfolds. See who's where, find the best vibe, and make instant connections with people in the same room.",
+
+    "promo_app_title": "Unlock Exclusive Rewards",
+    "promo_app_sub": "Your Night, Rewarded.",
+    "promo_app_desc": "Discover exclusive promotions, free shots, and VIP access directly on the Bouncinn app. As you bounce around the best venues, your loyalty turns into real rewards.",
+
+    "quote_text": "\"Digital dating is broken: we are exhausted by endless swiping and the void between the screen and the real world.\"",
+    "quote_sub": "We brought the bounce back.",
+
+    "feat_promoter_title": "Promoter Management",
+    "feat_promoter_sub": "Real-Time Promoter Analytics",
+    "feat_promoter_desc": "Optimize your PR strategy with data-driven insights by monitoring which promoter sold how many tickets or brought in how many guests in real-time.",
+
+    "feat_promo_title": "Promotion Engine",
+    "feat_promo_sub": "Direct-to-Consumer Campaigns",
+    "feat_promo_desc": "Reach the end-user directly through high-impact mobile campaigns and personalized notifications.",
+
+    "feat_target_title": "Precision Targeting",
+    "feat_target_sub": "Direct-to-Consumer Campaigns",
+    "feat_target_desc": "Define your target audience using integrated PR and event data. Reach the right people, not just \"more\" people.",
+
+    "feat_analytics_title": "Analytics Dashboard",
+    "feat_analytics_sub": "Real-time insights for venue growth",
+    "feat_analytics_desc": "Use data insights to optimize promotions, pricing and capacity. Identify who attends your venue, their demographics and visit patterns. Track check-ins, entrances and event popularity in real time.",
+
+    "feat_guest_title": "Guest Management",
+    "feat_guest_sub": "Smart guest list and check-in management for venues",
+    "feat_guest_desc": "You are gathering massive amounts of data from PR channels, yet struggling to pivot this into actionable strategies.",
+
+    "security_title": "Built with security, control and scalability in mind",
+    "security_1": "100% private venue database",
+    "security_2": "White-label and API integrations",
+    "security_3": "Secure and scalable infrastructure",
+
+    "cta_big": "Bounce in Bouncinn",
+    "cta_why": "Why us?",
+    "cta_lets": "Let's talk",
+    
+    "contact_form_title": "Let's talk",
+    "contact_form_desc": "Have questions? Let us know.",
+    "contact_name": "Name",
+    "contact_email": "Email",
+    "contact_message": "Message",
+    "contact_submit": "Send",
+    "contact_success_title": "Message Sent!",
+    "contact_success_desc": "We will get back to you shortly."
+  }
+}

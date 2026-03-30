@@ -1,0 +1,63 @@
+{
+  "Index": {
+    "nav_app": "APP",
+    "nav_crm": "CRM",
+    "nav_contact": "İLETİŞİM",
+
+    "hero_title": "Bouncinn Nedir?",
+    "hero_subtitle": "Bouncinn, sizi aynı odadaki insanlarla eşleştirerek paylaşılan mekanları anında, gerçek hayattaki bağlantılara dönüştüren etkinlik tabanlı bir sosyal uygulamadır.",
+
+    "how_title": "Nasıl çalışır?",
+    "how_step1": "Etkinliğini bul",
+    "how_step2": "Check-in yap",
+    "how_step3": "İnsanlarla tanış",
+
+    "realtime_title": "Gerçek Zamanlı Bağlam",
+    "realtime_desc": "Gece hayatını anbean keşfedin. Kimin nerede olduğunu görün, en iyi atmosferi bulun ve aynı mekandaki insanlarla anında bağlantı kurun.",
+
+    "promo_app_title": "Özel Ödüllerin Kilidini Açın",
+    "promo_app_sub": "Geceniz Ödüllendirilsin.",
+    "promo_app_desc": "Bouncinn uygulamasında özel promosyonları, ücretsiz içecekleri ve VIP erişimlerini keşfedin. En iyi mekanlarda eğlendikçe sadakatiniz gerçek ödüllere dönüşsün.",
+
+    "quote_text": "\"Dijital flörtleşme bozuldu: bitmek bilmeyen ekran kaydırmalarından ve ekranla gerçek dünya arasındaki boşluktan yorulduk.\"",
+    "quote_sub": "Ruhumuzu geri getirdik.",
+
+    "feat_promoter_title": "Promoter Yönetimi",
+    "feat_promoter_sub": "Gerçek Zamanlı Promoter Analizleri",
+    "feat_promoter_desc": "Hangi promoterin kaç bilet sattığını veya kaç misafir getirdiğini gerçek zamanlı izleyerek PR stratejinizi veriye dayalı içgörülerle optimize edin.",
+
+    "feat_promo_title": "Promosyon Motoru",
+    "feat_promo_sub": "Doğrudan Tüketiciye Yönelik Kampanyalar",
+    "feat_promo_desc": "Yüksek etkili mobil kampanyalar ve kişiselleştirilmiş bildirimler aracılığıyla son kullanıcıya doğrudan ulaşın.",
+
+    "feat_target_title": "Hassas Hedefleme",
+    "feat_target_sub": "Doğrudan Tüketiciye Yönelik Kampanyalar",
+    "feat_target_desc": "Entegre PR ve etkinlik verilerini kullanarak hedef kitlenizi tanımlayın. Sadece 'daha fazla' kişiye değil, doğru kişilere ulaşın.",
+
+    "feat_analytics_title": "Analitik Dashboard",
+    "feat_analytics_sub": "Mekan büyümesi için gerçek zamanlı içgörüler",
+    "feat_analytics_desc": "Promosyonları, fiyatlandırmayı ve kapasiteyi optimize etmek için verileri kullanın. Mekanınıza kimlerin katıldığını, demografik özelliklerini ve ziyaret modellerini belirleyin.",
+
+    "feat_guest_title": "Misafir Yönetimi",
+    "feat_guest_sub": "Mekanlar için akıllı misafir listesi ve check-in yönetimi",
+    "feat_guest_desc": "PR kanallarından devasa miktarda veri topluyorsunuz, ancak bunu uygulanabilir stratejilere dönüştürmekte zorlanıyorsunuz.",
+
+    "security_title": "Güvenlik, kontrol ve ölçeklenebilirlik düşünülerek tasarlandı",
+    "security_1": "%100 özel mekan veri tabanı",
+    "security_2": "White-label ve API entegrasyonları",
+    "security_3": "Güvenli ve ölçeklenebilir altyapı",
+
+    "cta_big": "Bounce in Bouncinn",
+    "cta_why": "Neden biz?",
+    "cta_lets": "Hadi Konuşalım",
+
+    "contact_form_title": "Görüşelim",
+    "contact_form_desc": "Sorularınız mı var? Bize yazın.",
+    "contact_name": "Ad Soyad",
+    "contact_email": "E-posta",
+    "contact_message": "Mesaj",
+    "contact_submit": "Gönder",
+    "contact_success_title": "Mesaj Gönderildi",
+    "contact_success_desc": "Size en kısa sürede dönüş yapacağız."
+  }
+}
