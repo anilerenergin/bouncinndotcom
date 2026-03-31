@@ -1,7 +1,7 @@
 {
   "Index": {
     "nav_app": "APP",
-    "nav_crm": "CRM",
+    "nav_crm": "BUSINESS",
     "nav_contact": "CONTACT",
 
     "hero_title": "What is Bouncinn",
@@ -47,13 +47,9 @@
     "security_2": "White-label and API integrations",
     "security_3": "Secure and scalable infrastructure",
 
-    "cta_big": "Bounce in Bouncinn",
-    "cta_why": "Why us?",
     "cta_lets": "Let's talk",
-    "cta_desc": "Ready to elevate your venue's digital presence? We're here to help you integrate Bouncinn's cutting-edge CRM and nightlife network.",
+    "cta_desc": "Running a venue usually feels like juggling ten glass balls at once. Currently, your data and operations are scattered everywhere—and that’s exactly where you’re losing money. We're here to help you integrate Bouncinn's cutting-edge CRM and nightlife network.",
     
-    "contact_form_title": "Let's talk",
-    "contact_form_desc": "Have questions? Let us know.",
     "contact_name": "Name",
     "contact_email": "Email",
     "contact_message": "Message",

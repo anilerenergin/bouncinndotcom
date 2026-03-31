@@ -1,11 +1,11 @@
 {
   "Index": {
     "nav_app": "UYGULAMA",
-    "nav_crm": "CRM",
+    "nav_crm": "BUSINESS",
     "nav_contact": "İLETİŞİM",
 
     "hero_title": "Bouncinn Nedir?",
-    "hero_subtitle": "Bouncinn, aynı mekândaki insanları anında birbirine bağlayan etkinlik temelli bir sosyal uygulama. Ortak ortamları gerçek hayattaki samimi bağlantılara dönüştürüyor.",
+    "hero_subtitle": "Bouncinn, aynı mekândaki insanların bağlantı kurmasını sağlayan etkinlik temelli bir sosyal uygulamadır. Ortak deneyimleri samimi bağlantılara dönüştürüyoruz.",
 
     "how_title": "Nasıl Çalışır?",
     "how_step1": "Etkinliğini Bul",
@@ -16,44 +16,40 @@
     "realtime_desc": "Geceyi olduğu gibi, canlı canlı yaşa. Kimin nerede olduğunu gör, en yüksek enerjiyi yakala ve aynı mekândaki insanlarla hemen sohbete başla.",
 
     "promo_app_title": "Özel Ayrıcalıkların Kapısını Arala",
-    "promo_app_sub": "Gecen Ödüllendirilsin.",
-    "promo_app_desc": "Bouncinn uygulamasıyla özel kampanyaları, bedava ikramları ve VIP fırsatlarını keşfet. En iyi mekanlarda gezdikçe sadakatin gerçek ayrıcalıklara dönüşsün.",
+    "promo_app_sub": "Geceni Ödüllendirelim.",
+    "promo_app_desc": "Bouncinn uygulamasıyla özel kampanyaları, bedava ikramları ve VIP fırsatlarını keşfet. En iyi mekanlarda gezdikçe sadakatini gerçek ayrıcalıklara dönüştür.",
 
-    "quote_text": "\"Dijital tanışma kültürü bitti, yorulduk. Sürekli kaydırma ve ekranla gerçek hayat arasındaki o boşluk artık çok sıkıyor.\"",
-    "quote_sub": "Gerçek bağlantıyı yeniden biz getirdik.",
+    "quote_text": "\"Dijital tanışma kültürü kendini tüketti. Sürekli sağa sola kaydırmak ve ekranla gerçek hayat arasındaki fark, dijital tanışmayı anlamsız kılıyor.\"",
+    "quote_sub": "Gerçek bağlantıyı yeniden inşa ediyoruz.",
 
     "feat_promoter_title": "Promoter Yönetimi",
     "feat_promoter_sub": "Gerçek Zamanlı Promoter Analitiği",
-    "feat_promoter_desc": "Hangi promoter kaç bilet sattı, kaç guest getirdi anlık olarak takip et. PR stratejini veriye dayalı gerçek içgörülerle güçlendir.",
+    "feat_promoter_desc": "Hangi promoter kaç bilet sattı, kaç guest getirdi anlık olarak takip edin. PR stratejinizi veriye dayalı gerçek verilerle güçlendirin.",
 
-    "feat_promo_title": "Promosyon Motoru",
+    "feat_promo_title": "Promosyon Oluştur",
     "feat_promo_sub": "Kullanıcıya Doğrudan Ulaşan Kampanyalar",
-    "feat_promo_desc": "Yüksek etkili mobil kampanyalar ve kişiselleştirilmiş bildirimlerle son kullanıcıya tam zamanında ve direkt ulaş.",
+    "feat_promo_desc": "Yüksek etkili mobil kampanyalar ve kişiselleştirilmiş bildirimlerle son kullanıcıya doğru zamanda ve doğrudan ulaşın.",
 
     "feat_target_title": "Hassas Hedefleme",
     "feat_target_sub": "Doğru Kişiye, Doğru Anda",
-    "feat_target_desc": "PR ve etkinlik verilerini birleştirerek hedef kitleni net bir şekilde belirle. Daha fazla kişiye değil, tam doğru kişilere ulaş.",
+    "feat_target_desc": "PR ve etkinlik verilerini birleştirerek hedef kitlenizi belirlemenize yardımcı oluyoruz. Daha fazla kişiye değil, doğru kişilere ulaştırıyoruz.",
 
     "feat_analytics_title": "Analitik Paneli",
-    "feat_analytics_sub": "Mekan büyümesi için anlık içgörüler",
-    "feat_analytics_desc": "Promosyonları, fiyatları ve kapasiteyi optimize etmek için veriden faydalan. Guestlerin demografisini, ziyaret alışkanlıklarını, check-in’leri ve etkinlik popülerliğini gerçek zamanlı takip et.",
+    "feat_analytics_sub": "Mekan büyümesi için anlık veri analizi",
+    "feat_analytics_desc": "Promosyonları, fiyatları ve kapasiteyi optimize etmek için verilerden faydalanın. Müşterilerinizin demografisini, ziyaret alışkanlıklarını, check-in’leri ve etkinlik popülerliğini gerçek zamanlı takip edin.",
 
     "feat_guest_title": "Guest Yönetimi",
     "feat_guest_sub": "Mekanlar için akıllı liste ve check-in çözümü",
-    "feat_guest_desc": "PR kanallarından tonla veri topluyorsun ama bunları uygulanabilir stratejilere çevirmekte zorlanıyorsun. Biz bunu kolaylaştırıyoruz.",
+    "feat_guest_desc": "PR kanallarından tonla veri topluyorsunuz ama bunları uygulanabilir stratejilere çevirmekte zorlanıyorsunuz. Biz bunu kolaylaştırıyoruz.",
 
     "security_title": "Güvenlik, kontrol ve ölçeklenebilirlik ön planda",
     "security_1": "%100 özel mekan veri tabanı",
     "security_2": "White-label ve API entegrasyonları",
     "security_3": "Güvenli ve güçlü altyapı",
 
-    "cta_big": "Bouncinn’de Bounce Yap",
-    "cta_why": "Neden Biz?",
     "cta_lets": "Hadi Konuşalım",
-    "cta_desc": "Mekanının dijital varlığını bir üst seviyeye taşımaya hazır mısın? Bouncinn’in güçlü CRM çözümü ve gece hayatı ağını seninle buluşturmak için buradayız.",
+    "cta_desc": "Bir mekanı yönetmek genellikle aynı anda on işi birden yapmak gibidir. Şu anda verileriniz ve operasyonlarınız her yere dağılmış durumda; işte tam da bu noktada para kaybediyorsunuz. Bouncinn'in son teknoloji CRM sistemini ve gece hayatı ağını işletmenize entegre etmek için buradayız.",
 
-    "contact_form_title": "Görüşelim",
-    "contact_form_desc": "Soruların mı var? Bize yaz, hemen dönelim.",
     "contact_name": "Ad Soyad",
     "contact_email": "E-posta",
     "contact_message": "Mesajın",
