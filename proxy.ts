@@ -3,8 +3,9 @@ import { NextRequest } from 'next/server';
 
 const intlMiddleware = createMiddleware({
   locales: ['en', 'tr'],
-  defaultLocale: 'tr',
-  localePrefix: 'always'
+  defaultLocale: 'en',
+  localePrefix: 'as-needed',
+  localeDetection: true,
 });
 
 export function proxy(req: NextRequest) {
@@ -12,5 +13,10 @@ export function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/(tr|en)/:path*']
+  matcher: [
+    // Match all pathnames except for
+    // - … if they start with `/api`, `/_next` or `/_vercel`
+    // - … the ones containing a dot (e.g. `favicon.ico`)
+    '/((?!api|_next|_vercel|.*\\..*).*)',
+  ],
 };
