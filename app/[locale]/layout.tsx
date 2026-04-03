@@ -25,6 +25,9 @@ export const metadata: Metadata = {
     apple: '/apple-icon.png',
     shortcut: '/favicon.ico',
   },
+  verification: {
+    google: 'HuM0qAW7UbJL_UQhcW8pHiExNFur9VvoWcIk7-c4l4I',
+  },
 };
 
 export default async function LocaleLayout({
