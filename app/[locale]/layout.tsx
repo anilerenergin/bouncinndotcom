@@ -19,12 +19,13 @@ export const metadata: Metadata = {
   description: 'Event matchmaking and CRM platform',
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/icon.png', type: 'image/png' },
+      { url: '/favicon-96x96.png?v=1', sizes: '96x96', type: 'image/png' },
+      { url: '/favicon.svg?v=1', type: 'image/svg+xml' },
     ],
-    apple: '/apple-icon.png',
-    shortcut: '/favicon.ico',
+    apple: '/apple-touch-icon.png?v=1',
+    shortcut: '/favicon.ico?v=1',
   },
+  manifest: '/site.webmanifest?v=1',
   verification: {
     google: 'HuM0qAW7UbJL_UQhcW8pHiExNFur9VvoWcIk7-c4l4I',
   },
