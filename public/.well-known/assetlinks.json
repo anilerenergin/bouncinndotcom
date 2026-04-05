@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.bouncinn.app", 
+      "sha256_cert_fingerprints": ["9F:09:8C:94:D5:0A:85:F3:E4:D4:A8:16:27:7C:EE:AA:99:5D:E5:87:26:97:4A:C5:12:05:1B:4C:FE:C2:DC:4D"]
+    }
+  }
+]

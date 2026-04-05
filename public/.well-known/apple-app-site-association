@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "ZLTW3NU979.com.bouncinn.app", 
+        "paths": ["/event/*", "/venue/*", "/invite/group/*", "/chat/room/*"]
+      }
+    ]
+  }
+}
