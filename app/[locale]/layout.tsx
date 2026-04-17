@@ -18,15 +18,8 @@ export const metadata: Metadata = {
   title: 'Bouncinn',
   description: 'Event matchmaking and CRM platform',
   icons: {
-    icon: [
-      // Removing ?v=1 so Googlebot gets a stable, clean path
-      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-    ],
-    // Google often defaults to the 'apple' or 'icon' tag for search results
-    apple: '/apple-touch-icon.png',
-    // Point the shortcut to the high-res PNG as well
-    shortcut: '/favicon-96x96.png',
+    icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
+    shortcut: '/favicon.svg',
   },
   manifest: '/site.webmanifest',
   verification: {
