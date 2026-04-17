@@ -19,13 +19,16 @@ export const metadata: Metadata = {
   description: 'Event matchmaking and CRM platform',
   icons: {
     icon: [
-      { url: '/favicon-96x96.png?v=1', sizes: '96x96', type: 'image/png' },
-      { url: '/favicon.svg?v=1', type: 'image/svg+xml' },
+      // Removing ?v=1 so Googlebot gets a stable, clean path
+      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
     ],
-    apple: '/apple-touch-icon.png?v=1',
-    shortcut: '/favicon.ico?v=1',
+    // Google often defaults to the 'apple' or 'icon' tag for search results
+    apple: '/apple-touch-icon.png',
+    // Point the shortcut to the high-res PNG as well
+    shortcut: '/favicon-96x96.png',
   },
-  manifest: '/site.webmanifest?v=1',
+  manifest: '/site.webmanifest',
   verification: {
     google: 'HuM0qAW7UbJL_UQhcW8pHiExNFur9VvoWcIk7-c4l4I',
   },
