@@ -62,8 +62,15 @@ export function CtaFooterSection() {
          </div>
       </FadeInSection>
 
-      <div className="w-full text-center py-6 text-xs text-white/20 border-t border-white/5 relative z-10 bg-[#09090B]">
-        © {new Date().getFullYear()} BOUNCINN Technologies. The Pulse of the Night.
+      <div className="w-full py-6 border-t border-white/5 relative z-10 bg-[#09090B]">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/20">
+          <div>© {new Date().getFullYear()} BOUNCINN Technologies. The Pulse of the Night.</div>
+          <div className="flex items-center gap-4">
+            <Link href="/legal" className="hover:text-white transition-colors">
+              {t('nav_legal') || "Privacy & Legal"}
+            </Link>
+          </div>
+        </div>
       </div>
     </section>
   );
