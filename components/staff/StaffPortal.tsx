@@ -16,6 +16,7 @@ import {
   RefreshCw,
   ShieldCheck,
   TicketCheck,
+  X,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -65,6 +66,33 @@ type AvailablePromotion = {
   };
 };
 
+type AvailableGuestEntry = {
+  guestEntryId: string;
+  requestedBy: string;
+  status: string;
+  guestType: string;
+  availableUntil: string | null;
+  approvedAt: string | null;
+  createdAt: string | null;
+  updatedAt: string | null;
+  guestCount: number;
+  guests: string[];
+  members: ScannedUser[];
+  venue: {
+    id: string;
+    name: string | null;
+    companyId: string;
+  } | null;
+  event: {
+    id: string;
+    title: string | null;
+    companyId: string;
+    venueId: string | null;
+    startsAt: string | null;
+    endsAt: string | null;
+  } | null;
+};
+
 type ScannedUser = {
   id: string;
   name: string;
@@ -78,6 +106,7 @@ type RedemptionResponse = {
   success?: boolean;
   user?: ScannedUser | null;
   promotions?: AvailablePromotion[];
+  guestEntries?: AvailableGuestEntry[];
   promotion?: {
     id: string;
     title: string | null;
@@ -89,6 +118,14 @@ type RedemptionResponse = {
     promotion_id: string;
     status: string;
   };
+  guestEntry?: {
+    id: string;
+    requested_by: string;
+    venue_id: string | null;
+    event_id: string | null;
+    status: string;
+    guest_type: string;
+  };
   error?: string;
 };
 
@@ -96,6 +133,7 @@ type ParsedQrPayload = {
   userPromotionId?: string;
   userId?: string;
   promotionId?: string;
+  guestEntryId?: string;
 };
 
 type RedemptionState =
@@ -178,8 +216,11 @@ function mapFunctionError(message: string, status?: number) {
   if (lower.includes('expired')) return 'This promotion or access code has expired.';
   if (lower.includes('not active') || lower.includes('inactive')) return 'This promotion is inactive.';
   if (lower.includes('not started')) return 'This promotion has not started yet.';
-  if (lower.includes('no redeemable promotion') || lower.includes('promotion not found')) {
-    return 'No redeemable promotion was found for this QR.';
+  if (lower.includes('guest entry') && lower.includes('already')) return 'This guest entry has already been used.';
+  if (lower.includes('guest entry') && lower.includes('expired')) return 'This guest entry has expired.';
+  if (lower.includes('guest entry') && lower.includes('not approved')) return 'This guest entry is not approved yet.';
+  if (lower.includes('no redeemable') || lower.includes('promotion not found') || lower.includes('guest entry not found')) {
+    return 'No redeemable promotion or guest entry was found for this QR.';
   }
   if (lower.includes('qr')) return 'Invalid QR code.';
   if (lower.includes('device limit')) return 'The active device limit has been reached for this code.';
@@ -219,19 +260,22 @@ function extractQrPayload(rawValue: string): ParsedQrPayload | null {
       userPromotionId?: unknown;
       userId?: unknown;
       promotionId?: unknown;
+      guestEntryId?: unknown;
       qrPayload?: {
         userPromotionId?: unknown;
         userId?: unknown;
         promotionId?: unknown;
+        guestEntryId?: unknown;
       };
     };
     const payload = {
       userPromotionId: extractStringField(parsed.userPromotionId ?? parsed.qrPayload?.userPromotionId),
       userId: extractStringField(parsed.userId ?? parsed.qrPayload?.userId),
       promotionId: extractStringField(parsed.promotionId ?? parsed.qrPayload?.promotionId),
+      guestEntryId: extractStringField(parsed.guestEntryId ?? parsed.qrPayload?.guestEntryId),
     };
 
-    if (payload.userPromotionId || payload.userId || payload.promotionId) return payload;
+    if (payload.userPromotionId || payload.userId || payload.promotionId || payload.guestEntryId) return payload;
   } catch {
     // QR codes can be plain ids or URLs, so JSON parsing is only one path.
   }
@@ -242,9 +286,10 @@ function extractQrPayload(rawValue: string): ParsedQrPayload | null {
       userPromotionId: url.searchParams.get('userPromotionId')?.trim() || undefined,
       userId: url.searchParams.get('userId')?.trim() || undefined,
       promotionId: url.searchParams.get('promotionId')?.trim() || undefined,
+      guestEntryId: url.searchParams.get('guestEntryId')?.trim() || undefined,
     };
 
-    if (payload.userPromotionId || payload.userId || payload.promotionId) return payload;
+    if (payload.userPromotionId || payload.userId || payload.promotionId || payload.guestEntryId) return payload;
 
     const lastPathPart = url.pathname.split('/').filter(Boolean).at(-1);
     if (lastPathPart) {
@@ -290,8 +335,11 @@ export default function StaffPortal() {
   const [isScanning, setIsScanning] = useState(false);
   const [isRedeeming, setIsRedeeming] = useState(false);
   const [activePromotionId, setActivePromotionId] = useState('');
+  const [activeGuestEntryId, setActiveGuestEntryId] = useState('');
   const [scannedUser, setScannedUser] = useState<ScannedUser | null>(null);
+  const [expandedPhoto, setExpandedPhoto] = useState<{ url: string; alt: string } | null>(null);
   const [availablePromotions, setAvailablePromotions] = useState<AvailablePromotion[]>([]);
+  const [availableGuestEntries, setAvailableGuestEntries] = useState<AvailableGuestEntry[]>([]);
   const [redemptionState, setRedemptionState] = useState<RedemptionState>({ status: 'idle' });
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -306,7 +354,9 @@ export default function StaffPortal() {
     setCode('');
     setLoginError('');
     setScannedUser(null);
+    setExpandedPhoto(null);
     setAvailablePromotions([]);
+    setAvailableGuestEntries([]);
     setRedemptionState({ status: 'idle' });
   }, []);
 
@@ -344,8 +394,10 @@ export default function StaffPortal() {
       redeemingRef.current = true;
       setIsRedeeming(true);
       setActivePromotionId('');
+      setActiveGuestEntryId('');
       setScannedUser(null);
       setAvailablePromotions([]);
+      setAvailableGuestEntries([]);
       setRedemptionState({ status: 'idle' });
 
       let data: RedemptionResponse | null = null;
@@ -386,21 +438,23 @@ export default function StaffPortal() {
       }
 
       const promotions = data?.promotions || [];
-      if (promotions.length === 0) {
+      const guestEntries = data?.guestEntries || [];
+      if (promotions.length === 0 && guestEntries.length === 0) {
         setRedemptionState({
           status: 'error',
-          message: 'No redeemable promotion was found for this QR.',
-          detail: 'The guest may not have an active promotion for this staff access scope.',
+          message: 'No redeemable promotion or guest entry was found for this QR.',
+          detail: 'The guest may not have an active item for this staff access scope.',
         });
         return;
       }
 
       setScannedUser(data?.user || null);
       setAvailablePromotions(promotions);
+      setAvailableGuestEntries(guestEntries);
       setRedemptionState({
         status: 'success',
-        message: `${promotions.length} promotion${promotions.length === 1 ? '' : 's'} available`,
-        detail: 'Choose the exact promotion to use.',
+        message: `${promotions.length + guestEntries.length} item${promotions.length + guestEntries.length === 1 ? '' : 's'} available`,
+        detail: 'Choose the exact item to use.',
       });
       stopScanner();
     },
@@ -463,6 +517,68 @@ export default function StaffPortal() {
       });
     },
     [handleFunctionError, session],
+  );
+
+  const redeemSelectedGuestEntry = useCallback(
+    async (guestEntryId: string) => {
+      if (!session || redeemingRef.current) return;
+
+      redeemingRef.current = true;
+      setIsRedeeming(true);
+      setActiveGuestEntryId(guestEntryId);
+      setRedemptionState({ status: 'idle' });
+
+      let data: RedemptionResponse | null = null;
+      let errorMessage = '';
+      let errorStatus: number | undefined;
+
+      try {
+        const response = await getStaffSupabaseClient().functions.invoke<RedemptionResponse>('redeem-promotion', {
+          body: {
+            action: 'redeem',
+            sessionToken: session.sessionToken,
+            guestEntryId,
+            userId: scannedUser?.id,
+            qrPayload: { guestEntryId, userId: scannedUser?.id },
+          },
+        });
+
+        data = response.data;
+        if (response.error) {
+          const details = await getFunctionErrorDetails(response.error);
+          errorMessage = details.message;
+          errorStatus = details.status;
+        }
+      } catch (error) {
+        errorMessage = error instanceof Error ? error.message : 'Unable to use guest entry.';
+      }
+
+      setIsRedeeming(false);
+      setActiveGuestEntryId('');
+      redeemingRef.current = false;
+
+      if (errorMessage) {
+        handleFunctionError(errorMessage, errorStatus);
+        return;
+      }
+
+      if (data?.error) {
+        handleFunctionError(data.error);
+        return;
+      }
+
+      setAvailableGuestEntries((items) => items.filter((item) => item.guestEntryId !== guestEntryId));
+      if (data?.user) setScannedUser(data.user);
+      const usedEntry = availableGuestEntries.find((item) => item.guestEntryId === guestEntryId);
+      setRedemptionState({
+        status: 'success',
+        message: usedEntry?.guestCount && usedEntry.guestCount > 1 ? 'Group entry used' : 'Guest entry used',
+        detail: usedEntry?.guestCount && usedEntry.guestCount > 1
+          ? `All ${usedEntry.guestCount} group members are now marked as used.`
+          : 'The selected guest entry is now marked as used.',
+      });
+    },
+    [availableGuestEntries, handleFunctionError, scannedUser, session],
   );
 
   useEffect(() => {
@@ -604,6 +720,7 @@ export default function StaffPortal() {
     setCode('');
     setScannedUser(null);
     setAvailablePromotions([]);
+    setAvailableGuestEntries([]);
     setRedemptionState({ status: 'idle' });
   };
 
@@ -668,10 +785,10 @@ export default function StaffPortal() {
               <Button
                 type="submit"
                 disabled={isLoggingIn}
-                className="h-14 w-full rounded-lg bg-live-red text-sm font-black uppercase tracking-[0.16em] text-white shadow-[0_14px_34px_rgba(255,72,72,0.22)] hover:bg-live-red/90 active:scale-[0.99]"
+                className="h-14 w-full rounded-lg bg-live-red text-sm font-black tracking-[0.16em] text-white shadow-[0_14px_34px_rgba(255,72,72,0.22)] hover:bg-live-red/90 active:scale-[0.99]"
               >
                 {isLoggingIn ? <Loader2 className="mr-2 size-4 animate-spin" /> : <DoorOpen className="mr-2 size-4" />}
-                Continue
+                CONTINUE
               </Button>
             </form>
           </section>
@@ -724,8 +841,8 @@ export default function StaffPortal() {
         <section className="rounded-lg border border-white/[0.08] bg-[#111114]/85 p-4 shadow-[0_18px_60px_rgba(0,0,0,0.24)] sm:p-5">
           <div className="mb-4 flex flex-col gap-3">
             <div>
-              <h1 className="text-xl font-black tracking-tight sm:text-2xl">Scan promotion QR</h1>
-              <p className="mt-1 text-sm text-white/50">Scan guest QR and choose the promotion.</p>
+              <h1 className="text-xl font-black tracking-tight sm:text-2xl">Scan guest QR</h1>
+              <p className="mt-1 text-sm text-white/50">Scan guest QR and choose the promotion or guest entry.</p>
             </div>
             <div className="hidden sm:flex">
               <Button
@@ -768,7 +885,7 @@ export default function StaffPortal() {
               <div className="absolute inset-0 grid place-items-center bg-black/70">
                 <div className="flex items-center gap-3 rounded-lg border border-white/10 bg-black/85 px-4 py-3 text-sm font-bold shadow-2xl">
                   <Loader2 className="size-5 animate-spin text-live-red" />
-                  {activePromotionId ? 'Redeeming promotion' : 'Checking promotions'}
+                  {activePromotionId ? 'Redeeming promotion' : activeGuestEntryId ? 'Using guest entry' : 'Checking guest'}
                 </div>
               </div>
             ) : null}
@@ -793,7 +910,7 @@ export default function StaffPortal() {
             </div>
           ) : null}
 
-          {availablePromotions.length > 0 ? (
+          {availablePromotions.length > 0 || availableGuestEntries.length > 0 ? (
             <section className="mt-5 rounded-lg border border-white/[0.08] bg-black/30 p-3 shadow-[0_18px_60px_rgba(0,0,0,0.2)] sm:p-4">
               {scannedUser ? (
                 <div className="mb-4 rounded-lg border border-white/10 bg-[#151518] p-4">
@@ -801,13 +918,20 @@ export default function StaffPortal() {
                   <div className="mt-3 flex items-center gap-3">
                     <div className="grid size-12 shrink-0 place-items-center overflow-hidden rounded-lg border border-live-red/25 bg-live-red/10 text-base font-black text-live-red">
                       {scannedUser.photoUrl ? (
-                        <Image
-                          src={scannedUser.photoUrl}
-                          alt={scannedUser.name}
-                          width={48}
-                          height={48}
-                          className="h-full w-full object-cover"
-                        />
+                        <button
+                          type="button"
+                          onClick={() => setExpandedPhoto({ url: scannedUser.photoUrl!, alt: scannedUser.name })}
+                          className="h-full w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-live-red"
+                          aria-label={`Open ${scannedUser.name} photo`}
+                        >
+                          <Image
+                            src={scannedUser.photoUrl}
+                            alt={scannedUser.name}
+                            width={48}
+                            height={48}
+                            className="h-full w-full object-cover"
+                          />
+                        </button>
                       ) : (
                         scannedUser.name.slice(0, 1).toUpperCase()
                       )}
@@ -822,95 +946,208 @@ export default function StaffPortal() {
                 </div>
               ) : null}
 
-              <div className="mb-4 flex items-center justify-between gap-3">
-                <div>
-                  <h2 className="font-black">Available promotions</h2>
-                  <p className="mt-1 text-sm text-white/50">Select the exact promotion the guest wants to use.</p>
-                </div>
-                <span className="rounded-full border border-live-red/25 bg-live-red/10 px-3 py-1 text-xs font-bold text-live-red">
-                  {availablePromotions.length}
-                </span>
-              </div>
+              {availableGuestEntries.length > 0 ? (
+                <div className="mb-5">
+                  <div className="mb-4 flex items-center justify-between gap-3">
+                    <div>
+                      <h2 className="font-black">Guest entries</h2>
+                      <p className="mt-1 text-sm text-white/50">Use an approved entry for this venue or event.</p>
+                    </div>
+                    <span className="rounded-full border border-live-red/25 bg-live-red/10 px-3 py-1 text-xs font-bold text-live-red">
+                      {availableGuestEntries.length}
+                    </span>
+                  </div>
 
-              <div className="space-y-3">
-                {availablePromotions.map((item) => {
-                  const validUntil = formatOptionalDate(item.promotion.endsAt || item.promotion.validUntil);
-                  return (
-                    <article
-                      key={item.userPromotionId}
-                      className="rounded-lg border border-white/[0.08] bg-[#151518] p-3 shadow-[0_14px_44px_rgba(0,0,0,0.18)] sm:p-4"
-                    >
-                      <div className="flex flex-col gap-4">
-                        <div className="min-w-0">
-                          {item.promotion.bannerUrl ? (
-                            <div className="mb-4 overflow-hidden rounded-lg border border-white/10 bg-black/30">
-                              <Image
-                                src={item.promotion.bannerUrl}
-                                alt={item.promotion.title || 'Promotion banner'}
-                                width={720}
-                                height={240}
-                                className="h-32 w-full object-cover"
-                              />
-                            </div>
-                          ) : null}
-                          <div className="flex items-start justify-between gap-3">
-                            <h3 className="text-lg font-black leading-tight text-white">
-                              {item.promotion.title || 'Promotion'}
-                            </h3>
-                            {item.promotion.type ? (
-                              <span className="shrink-0 rounded-full border border-live-red/25 bg-live-red/10 px-2.5 py-1 text-[11px] font-black uppercase tracking-[0.12em] text-live-red">
-                                {humanizeValue(item.promotion.type)}
-                              </span>
-                            ) : null}
-                          </div>
-                          {item.promotion.description ? (
-                            <p className="mt-2 text-sm leading-6 text-white/70">{item.promotion.description}</p>
-                          ) : null}
-                          {item.promotion.noteToStaff ? (
-                            <div className="mt-3 rounded-lg border border-live-red/20 bg-live-red/10 p-3">
-                              <p className="text-xs font-black uppercase tracking-[0.16em] text-live-red">Note to staff</p>
-                              <p className="mt-1 text-sm leading-6 text-white/80">{item.promotion.noteToStaff}</p>
-                            </div>
-                          ) : null}
-                          <div className="mt-3 flex flex-wrap gap-2 text-xs font-medium text-white/50">
-                            <span className="rounded-full bg-white/5 px-2.5 py-1">User status: {humanizeValue(item.status) || item.status}</span>
-                            {item.promotion.status ? (
-                              <span className="rounded-full bg-white/5 px-2.5 py-1">Promotion: {humanizeValue(item.promotion.status)}</span>
-                            ) : null}
-                            {item.promotion.type ? (
-                              <span className="rounded-full bg-white/5 px-2.5 py-1">Type: {humanizeValue(item.promotion.type)}</span>
-                            ) : null}
-                            {validUntil ? <span className="rounded-full bg-white/5 px-2.5 py-1">Valid until {validUntil}</span> : null}
-                            {item.promotion.startsAt ? (
-                              <span className="rounded-full bg-white/5 px-2.5 py-1">Starts {formatOptionalDate(item.promotion.startsAt)}</span>
-                            ) : null}
-                            {item.promotion.venueId ? (
-                              <span className="rounded-full bg-white/5 px-2.5 py-1">Venue scoped</span>
-                            ) : null}
-                            {item.promotion.eventId ? (
-                              <span className="rounded-full bg-white/5 px-2.5 py-1">Event scoped</span>
-                            ) : null}
-                          </div>
-                        </div>
-
-                        <Button
-                          type="button"
-                          disabled={isRedeeming}
-                          onClick={() => void redeemSelectedPromotion(item.userPromotionId)}
-                          className="h-14 w-full shrink-0 rounded-lg bg-live-red px-4 font-black text-white shadow-[0_14px_34px_rgba(255,72,72,0.2)] hover:bg-live-red/90 active:scale-[0.99]"
+                  <div className="space-y-3">
+                    {availableGuestEntries.map((item) => {
+                      const availableUntil = formatOptionalDate(item.availableUntil);
+                      const eventStarts = formatOptionalDate(item.event?.startsAt || null);
+                      return (
+                        <article
+                          key={item.guestEntryId}
+                          className="rounded-lg border border-white/[0.08] bg-[#151518] p-3 shadow-[0_14px_44px_rgba(0,0,0,0.18)] sm:p-4"
                         >
-                          {activePromotionId === item.userPromotionId ? (
-                            <Loader2 className="mr-2 size-4 animate-spin" />
-                          ) : (
-                            <TicketCheck className="mr-2 size-4" />
-                          )}
-                          Use promotion
-                        </Button>
-                      </div>
-                    </article>
-                  );
-                })}
-              </div>
+                          <div className="flex flex-col gap-4">
+                            <div className="min-w-0">
+                              <div className="flex items-start justify-between gap-3">
+                                <h3 className="text-lg font-black leading-tight text-white">
+                                  {item.event?.title || item.venue?.name || 'Guest entry'}
+                                </h3>
+                                <span className="shrink-0 rounded-full border border-live-red/25 bg-live-red/10 px-2.5 py-1 text-[11px] font-black uppercase tracking-[0.12em] text-live-red">
+                                  {humanizeValue(item.guestType) || 'Entry'}
+                                </span>
+                              </div>
+                              <div className="mt-3 flex flex-wrap gap-2 text-xs font-medium text-white/50">
+                                <span className="rounded-full bg-white/5 px-2.5 py-1">Status: {humanizeValue(item.status) || item.status}</span>
+                                <span className="rounded-full bg-white/5 px-2.5 py-1">
+                                  {item.guestCount} guest{item.guestCount === 1 ? '' : 's'}
+                                </span>
+                                {item.venue?.name ? <span className="rounded-full bg-white/5 px-2.5 py-1">{item.venue.name}</span> : null}
+                                {eventStarts ? <span className="rounded-full bg-white/5 px-2.5 py-1">Event starts {eventStarts}</span> : null}
+                                {availableUntil ? <span className="rounded-full bg-white/5 px-2.5 py-1">Available until {availableUntil}</span> : null}
+                              </div>
+                              {item.members.length > 0 ? (
+                                <div className="mt-4 rounded-lg border border-white/10 bg-black/25 p-3">
+                                  <div className="mb-3 flex items-center justify-between gap-3">
+                                    <p className="text-xs font-black uppercase tracking-[0.16em] text-white/45">
+                                      {item.guestCount > 1 ? 'Group members' : 'Guest'}
+                                    </p>
+                                    {item.guestCount > 1 ? (
+                                      <span className="rounded-full border border-live-red/20 bg-live-red/10 px-2.5 py-1 text-[11px] font-bold text-live-red">
+                                        Uses all
+                                      </span>
+                                    ) : null}
+                                  </div>
+                                  <div className="space-y-2">
+                                    {item.members.map((member) => (
+                                      <div key={member.id} className="flex items-center gap-3 rounded-lg bg-white/[0.03] p-2">
+                                        <div className="grid size-10 shrink-0 place-items-center overflow-hidden rounded-lg border border-white/10 bg-live-red/10 text-sm font-black text-live-red">
+                                          {member.photoUrl ? (
+                                            <button
+                                              type="button"
+                                              onClick={() => setExpandedPhoto({ url: member.photoUrl!, alt: member.name })}
+                                              className="h-full w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-live-red"
+                                              aria-label={`Open ${member.name} photo`}
+                                            >
+                                              <Image
+                                                src={member.photoUrl}
+                                                alt={member.name}
+                                                width={40}
+                                                height={40}
+                                                className="h-full w-full object-cover"
+                                              />
+                                            </button>
+                                          ) : (
+                                            member.name.slice(0, 1).toUpperCase()
+                                          )}
+                                        </div>
+                                        <div className="min-w-0">
+                                          <p className="truncate text-sm font-black text-white">{member.name}</p>
+                                          {member.username ? (
+                                            <p className="truncate text-xs font-medium text-white/45">@{member.username}</p>
+                                          ) : null}
+                                        </div>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                              ) : null}
+                            </div>
+
+                            <Button
+                              type="button"
+                              disabled={isRedeeming}
+                              onClick={() => void redeemSelectedGuestEntry(item.guestEntryId)}
+                              className="h-14 w-full shrink-0 rounded-lg bg-live-red px-4 font-black text-white shadow-[0_14px_34px_rgba(255,72,72,0.2)] hover:bg-live-red/90 active:scale-[0.99]"
+                            >
+                              {activeGuestEntryId === item.guestEntryId ? (
+                                <Loader2 className="mr-2 size-4 animate-spin" />
+                              ) : (
+                                <TicketCheck className="mr-2 size-4" />
+                              )}
+                              {item.guestCount > 1 ? 'Use group entry' : 'Use guest entry'}
+                            </Button>
+                          </div>
+                        </article>
+                      );
+                    })}
+                  </div>
+                </div>
+              ) : null}
+
+              {availablePromotions.length > 0 ? (
+                <>
+                  <div className="mb-4 flex items-center justify-between gap-3">
+                    <div>
+                      <h2 className="font-black">Available promotions</h2>
+                      <p className="mt-1 text-sm text-white/50">Select the exact promotion the guest wants to use.</p>
+                    </div>
+                    <span className="rounded-full border border-live-red/25 bg-live-red/10 px-3 py-1 text-xs font-bold text-live-red">
+                      {availablePromotions.length}
+                    </span>
+                  </div>
+
+                  <div className="space-y-3">
+                    {availablePromotions.map((item) => {
+                      const validUntil = formatOptionalDate(item.promotion.endsAt || item.promotion.validUntil);
+                      return (
+                        <article
+                          key={item.userPromotionId}
+                          className="rounded-lg border border-white/[0.08] bg-[#151518] p-3 shadow-[0_14px_44px_rgba(0,0,0,0.18)] sm:p-4"
+                        >
+                          <div className="flex flex-col gap-4">
+                            <div className="min-w-0">
+                              {item.promotion.bannerUrl ? (
+                                <div className="mb-4 overflow-hidden rounded-lg border border-white/10 bg-black/30">
+                                  <Image
+                                    src={item.promotion.bannerUrl}
+                                    alt={item.promotion.title || 'Promotion banner'}
+                                    width={720}
+                                    height={240}
+                                    className="h-32 w-full object-cover"
+                                  />
+                                </div>
+                              ) : null}
+                              <div className="flex items-start justify-between gap-3">
+                                <h3 className="text-lg font-black leading-tight text-white">
+                                  {item.promotion.title || 'Promotion'}
+                                </h3>
+                                {item.promotion.type ? (
+                                  <span className="shrink-0 rounded-full border border-live-red/25 bg-live-red/10 px-2.5 py-1 text-[11px] font-black uppercase tracking-[0.12em] text-live-red">
+                                    {humanizeValue(item.promotion.type)}
+                                  </span>
+                                ) : null}
+                              </div>
+                              {item.promotion.description ? (
+                                <p className="mt-2 text-sm leading-6 text-white/70">{item.promotion.description}</p>
+                              ) : null}
+                              {item.promotion.noteToStaff ? (
+                                <div className="mt-3 rounded-lg border border-live-red/20 bg-live-red/10 p-3">
+                                  <p className="text-xs font-black uppercase tracking-[0.16em] text-live-red">Note to staff</p>
+                                  <p className="mt-1 text-sm leading-6 text-white/80">{item.promotion.noteToStaff}</p>
+                                </div>
+                              ) : null}
+                              <div className="mt-3 flex flex-wrap gap-2 text-xs font-medium text-white/50">
+                                <span className="rounded-full bg-white/5 px-2.5 py-1">User status: {humanizeValue(item.status) || item.status}</span>
+                                {item.promotion.status ? (
+                                  <span className="rounded-full bg-white/5 px-2.5 py-1">Promotion: {humanizeValue(item.promotion.status)}</span>
+                                ) : null}
+                                {item.promotion.type ? (
+                                  <span className="rounded-full bg-white/5 px-2.5 py-1">Type: {humanizeValue(item.promotion.type)}</span>
+                                ) : null}
+                                {validUntil ? <span className="rounded-full bg-white/5 px-2.5 py-1">Valid until {validUntil}</span> : null}
+                                {item.promotion.startsAt ? (
+                                  <span className="rounded-full bg-white/5 px-2.5 py-1">Starts {formatOptionalDate(item.promotion.startsAt)}</span>
+                                ) : null}
+                                {item.promotion.venueId ? (
+                                  <span className="rounded-full bg-white/5 px-2.5 py-1">Venue scoped</span>
+                                ) : null}
+                                {item.promotion.eventId ? (
+                                  <span className="rounded-full bg-white/5 px-2.5 py-1">Event scoped</span>
+                                ) : null}
+                              </div>
+                            </div>
+
+                            <Button
+                              type="button"
+                              disabled={isRedeeming}
+                              onClick={() => void redeemSelectedPromotion(item.userPromotionId)}
+                              className="h-14 w-full shrink-0 rounded-lg bg-live-red px-4 font-black text-white shadow-[0_14px_34px_rgba(255,72,72,0.2)] hover:bg-live-red/90 active:scale-[0.99]"
+                            >
+                              {activePromotionId === item.userPromotionId ? (
+                                <Loader2 className="mr-2 size-4 animate-spin" />
+                              ) : (
+                                <TicketCheck className="mr-2 size-4" />
+                              )}
+                              Use promotion
+                            </Button>
+                          </div>
+                        </article>
+                      );
+                    })}
+                  </div>
+                </>
+              ) : null}
             </section>
           ) : null}
 
@@ -939,6 +1176,28 @@ export default function StaffPortal() {
 
       </div>
 
+      {expandedPhoto ? (
+        <div className="fixed inset-0 z-50 bg-black/95 p-4">
+          <button
+            type="button"
+            onClick={() => setExpandedPhoto(null)}
+            className="absolute right-4 top-4 z-10 grid size-11 place-items-center rounded-full border border-white/10 bg-white/10 text-white backdrop-blur-xl hover:bg-white/15"
+            aria-label="Close photo"
+          >
+            <X className="size-5" />
+          </button>
+          <div className="flex h-full items-center justify-center">
+            <Image
+              src={expandedPhoto.url}
+              alt={expandedPhoto.alt}
+              width={960}
+              height={960}
+              className="max-h-[86dvh] w-full max-w-xl rounded-lg object-contain"
+              priority
+            />
+          </div>
+        </div>
+      ) : null}
     </main>
   );
 }
