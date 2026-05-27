@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
+import jsQR from 'jsqr';
 import {
   AlertTriangle,
   BadgeCheck,
@@ -64,8 +65,18 @@ type AvailablePromotion = {
   };
 };
 
+type ScannedUser = {
+  id: string;
+  name: string;
+  username: string | null;
+  firstName: string | null;
+  lastName: string | null;
+  photoUrl: string | null;
+};
+
 type RedemptionResponse = {
   success?: boolean;
+  user?: ScannedUser | null;
   promotions?: AvailablePromotion[];
   promotion?: {
     id: string;
@@ -91,16 +102,6 @@ type RedemptionState =
   | { status: 'idle' }
   | { status: 'success'; message: string; detail?: string }
   | { status: 'error'; message: string; detail?: string };
-
-type BarcodeDetectorCtor = new (options?: { formats?: string[] }) => {
-  detect(source: CanvasImageSource): Promise<Array<{ rawValue?: string }>>;
-};
-
-declare global {
-  interface Window {
-    BarcodeDetector?: BarcodeDetectorCtor;
-  }
-}
 
 function createDeviceId() {
   if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) {
@@ -289,10 +290,12 @@ export default function StaffPortal() {
   const [isScanning, setIsScanning] = useState(false);
   const [isRedeeming, setIsRedeeming] = useState(false);
   const [activePromotionId, setActivePromotionId] = useState('');
+  const [scannedUser, setScannedUser] = useState<ScannedUser | null>(null);
   const [availablePromotions, setAvailablePromotions] = useState<AvailablePromotion[]>([]);
   const [redemptionState, setRedemptionState] = useState<RedemptionState>({ status: 'idle' });
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const scanLoopRef = useRef<number | null>(null);
   const redeemingRef = useRef(false);
@@ -302,6 +305,7 @@ export default function StaffPortal() {
     setSession(null);
     setCode('');
     setLoginError('');
+    setScannedUser(null);
     setAvailablePromotions([]);
     setRedemptionState({ status: 'idle' });
   }, []);
@@ -340,6 +344,7 @@ export default function StaffPortal() {
       redeemingRef.current = true;
       setIsRedeeming(true);
       setActivePromotionId('');
+      setScannedUser(null);
       setAvailablePromotions([]);
       setRedemptionState({ status: 'idle' });
 
@@ -390,6 +395,7 @@ export default function StaffPortal() {
         return;
       }
 
+      setScannedUser(data?.user || null);
       setAvailablePromotions(promotions);
       setRedemptionState({
         status: 'success',
@@ -449,6 +455,7 @@ export default function StaffPortal() {
       }
 
       setAvailablePromotions((items) => items.filter((item) => item.userPromotionId !== userPromotionId));
+      if (data?.user) setScannedUser(data.user);
       setRedemptionState({
         status: 'success',
         message: data?.promotion?.title ? `${data.promotion.title} redeemed` : 'Promotion redeemed',
@@ -474,11 +481,6 @@ export default function StaffPortal() {
     setScannerError('');
     setRedemptionState({ status: 'idle' });
 
-    if (!window.BarcodeDetector) {
-      setScannerError('Camera QR scanning is not supported in this browser. Paste or type the QR payload below.');
-      return;
-    }
-
     if (!navigator.mediaDevices?.getUserMedia) {
       setScannerError('Camera access is not available in this browser.');
       return;
@@ -497,19 +499,40 @@ export default function StaffPortal() {
         await videoRef.current.play();
       }
 
-      const detector = new window.BarcodeDetector({ formats: ['qr_code'] });
-
-      const scan = async () => {
+      const scan = () => {
         if (!videoRef.current || !streamRef.current || redeemingRef.current) {
           scanLoopRef.current = window.requestAnimationFrame(scan);
           return;
         }
 
         try {
-          const codes = await detector.detect(videoRef.current);
-          const rawValue = codes[0]?.rawValue;
-          if (rawValue) {
-            await lookupPromotions(rawValue);
+          const video = videoRef.current;
+          const canvas = canvasRef.current;
+          const width = video.videoWidth;
+          const height = video.videoHeight;
+
+          if (!canvas || width === 0 || height === 0) {
+            scanLoopRef.current = window.requestAnimationFrame(scan);
+            return;
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const context = canvas.getContext('2d', { willReadFrequently: true });
+
+          if (!context) {
+            scanLoopRef.current = window.requestAnimationFrame(scan);
+            return;
+          }
+
+          context.drawImage(video, 0, 0, width, height);
+          const imageData = context.getImageData(0, 0, width, height);
+          const qrCode = jsQR(imageData.data, imageData.width, imageData.height, {
+            inversionAttempts: 'dontInvert',
+          });
+
+          if (qrCode?.data) {
+            void lookupPromotions(qrCode.data);
             return;
           }
         } catch {
@@ -579,6 +602,7 @@ export default function StaffPortal() {
     window.localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(nextSession));
     setSession(nextSession);
     setCode('');
+    setScannedUser(null);
     setAvailablePromotions([]);
     setRedemptionState({ status: 'idle' });
   };
@@ -724,6 +748,7 @@ export default function StaffPortal() {
             aria-label={isScanning ? 'Camera scanner active' : 'Press to scan QR'}
           >
             <video ref={videoRef} className="h-full w-full object-cover" muted playsInline />
+            <canvas ref={canvasRef} className="hidden" />
             <div className="pointer-events-none absolute inset-5 rounded-lg border border-white/10" />
             <div className="pointer-events-none absolute left-5 top-5 h-10 w-10 rounded-tl-lg border-l-2 border-t-2 border-live-red" />
             <div className="pointer-events-none absolute right-5 top-5 h-10 w-10 rounded-tr-lg border-r-2 border-t-2 border-live-red" />
@@ -770,6 +795,33 @@ export default function StaffPortal() {
 
           {availablePromotions.length > 0 ? (
             <section className="mt-5 rounded-lg border border-white/[0.08] bg-black/30 p-3 shadow-[0_18px_60px_rgba(0,0,0,0.2)] sm:p-4">
+              {scannedUser ? (
+                <div className="mb-4 rounded-lg border border-white/10 bg-[#151518] p-4">
+                  <p className="text-xs font-black uppercase tracking-[0.18em] text-white/45">Guest</p>
+                  <div className="mt-3 flex items-center gap-3">
+                    <div className="grid size-12 shrink-0 place-items-center overflow-hidden rounded-lg border border-live-red/25 bg-live-red/10 text-base font-black text-live-red">
+                      {scannedUser.photoUrl ? (
+                        <Image
+                          src={scannedUser.photoUrl}
+                          alt={scannedUser.name}
+                          width={48}
+                          height={48}
+                          className="h-full w-full object-cover"
+                        />
+                      ) : (
+                        scannedUser.name.slice(0, 1).toUpperCase()
+                      )}
+                    </div>
+                    <div className="min-w-0">
+                      <p className="truncate text-lg font-black text-white">{scannedUser.name}</p>
+                      {scannedUser.username ? (
+                        <p className="truncate text-sm font-medium text-white/50">@{scannedUser.username}</p>
+                      ) : null}
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+
               <div className="mb-4 flex items-center justify-between gap-3">
                 <div>
                   <h2 className="font-black">Available promotions</h2>

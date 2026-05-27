@@ -17,10 +17,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${detail.item.name} | Bouncinn`,
-    description: detail.item.description || detail.item.address || 'Bouncinn venue',
+    description: detail.item.address || 'Bouncinn venue',
     openGraph: {
       title: detail.item.name,
-      description: detail.item.description || detail.item.address || 'Bouncinn venue',
+      description: detail.item.address || 'Bouncinn venue',
       images: detail.item.cover_photo ? [detail.item.cover_photo] : undefined,
     },
   };
