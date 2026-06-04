@@ -31,9 +31,9 @@ export default function ContactForm() {
 
       if (error) throw error;
       setStatus('success');
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error submitting form:', error);
-      setErrorMessage(error.message || 'Something went wrong. Please try again.');
+      setErrorMessage(error instanceof Error ? error.message : 'Something went wrong. Please try again.');
       setStatus('error');
     }
   };

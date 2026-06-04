@@ -39,8 +39,41 @@
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
   
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-manrope);
   --font-mono: var(--font-geist-mono);
+}
+
+@layer utilities {
+  @keyframes bouncinn-float-left {
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(-10deg); }
+    50% { transform: translate3d(-8px, -18px, 0) rotate(-7deg); }
+  }
+
+  @keyframes bouncinn-float-center {
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(2deg); }
+    50% { transform: translate3d(0, -22px, 0) rotate(0deg); }
+  }
+
+  @keyframes bouncinn-float-right {
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(11deg); }
+    50% { transform: translate3d(9px, -16px, 0) rotate(8deg); }
+  }
+
+  .bouncinn-card-left {
+    animation: bouncinn-float-left 7s ease-in-out infinite;
+  }
+
+  .bouncinn-card-center {
+    animation: bouncinn-float-center 6.4s ease-in-out infinite;
+  }
+
+  .bouncinn-card-right {
+    animation: bouncinn-float-right 7.4s ease-in-out infinite;
+  }
+
+  .bouncinn-hero-perspective {
+    perspective: 1400px;
+  }
 }
 
 @layer base {
@@ -66,7 +99,7 @@
   }
 
   .dark {
-    --background: #09090B;
+    --background: #121212;
     --foreground: #FAFAFA;
     --card: #18181B;
     --card-foreground: #FAFAFA;

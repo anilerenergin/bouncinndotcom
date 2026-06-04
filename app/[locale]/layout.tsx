@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Geist_Mono, Manrope } from 'next/font/google';
 import '../globals.css';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const manrope = Manrope({
+  variable: '--font-manrope',
   subsets: ['latin'],
 });
 
@@ -43,7 +43,7 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark scroll-smooth`}>
+    <html lang={locale} className={`${manrope.variable} ${geistMono.variable} h-full antialiased dark scroll-smooth`}>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <NextIntlClientProvider messages={messages} locale={locale}>
           {children}

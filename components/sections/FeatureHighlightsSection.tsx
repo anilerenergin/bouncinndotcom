@@ -11,7 +11,7 @@ export function FeatureHighlightsSection() {
   return (
     <>
       <div className="w-full py-20 mt-12 flex flex-col items-center justify-center">
-        <h2 className="text-sm md:text-base font-bold tracking-[0.3em] text-white/40 uppercase mb-8">Venue & Organization Tools</h2>
+        <h2 className="text-sm md:text-base font-bold tracking-[0.3em] text-white/40 mb-8">VENUE & ORGANIZATION TOOLS</h2>
         <div className="flex flex-col items-start leading-[0.85] select-none">
           <h1 className="text-7xl md:text-[6rem] lg:text-[7.5rem] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-[#f2f2f2] to-[#444] pb-2">
             Bouncinn

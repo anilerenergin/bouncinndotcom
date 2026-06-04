@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 
-export default async function LocaleHomeRedirect({
+export default async function BlogRedirectPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
