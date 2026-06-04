@@ -12,7 +12,6 @@ export function FeatureHighlightsSection() {
     <>
       <div className="w-full py-20 mt-12 flex flex-col items-center justify-center">
         <h2 className="text-sm md:text-base font-bold tracking-[0.3em] text-white/40 uppercase mb-8">Venue & Organization Tools</h2>
-        
         <div className="flex flex-col items-start leading-[0.85] select-none">
           <h1 className="text-7xl md:text-[6rem] lg:text-[7.5rem] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-[#f2f2f2] to-[#444] pb-2">
             Bouncinn
@@ -24,6 +23,61 @@ export function FeatureHighlightsSection() {
       </div>
 
       <div className="space-y-24 md:space-y-32">
+        {/* Layout 4: Dark Glass Panel for Analytics Dashboard */}
+        <FadeInSection className="relative w-full overflow-hidden !py-16 md:!py-24 border-y border-white/5 bg-[#09090B] mt-24 md:mt-32">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(242,253,10,0.03),transparent_50%)] mix-blend-screen pointer-events-none" />
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 relative z-10 max-w-7xl mx-auto px-6">
+            <motion.div 
+              whileHover={{ rotateY: 5, scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 200 }}
+              className="flex-1 w-full flex justify-center order-last lg:order-first perspective-1000"
+            >
+              <img 
+                src="/images/analytics.png" 
+                alt={t('feat_analytics_title')}
+                className="max-w-full w-auto max-h-[350px] md:max-h-[500px] rounded-[2rem] border border-white/5 drop-shadow-[0_20px_60px_rgba(0,0,0,0.8)]" 
+              />
+            </motion.div>
+            <div className="flex-1 space-y-4 md:space-y-6 flex flex-col items-center lg:items-start text-center lg:text-left order-first lg:order-last">
+              <h2 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter mb-2 md:mb-6">{t('feat_analytics_title')}</h2>
+              <div className="space-y-4 border-l-0 lg:border-l-2 border-live-red/60 pl-0 lg:pl-6 py-2 my-4 md:my-8 relative">
+                <div className="hidden lg:block absolute top-0 -left-px w-0.5 h-1/2 bg-live-red shadow-[0_0_10px_rgba(255,72,72,0.8)]" />
+                <h3 className="text-xl font-bold text-white">{t('feat_analytics_sub')}</h3>
+                <p className="text-base md:text-lg text-white/60 leading-relaxed max-w-xl mx-auto lg:mx-0">{t('feat_analytics_desc')}</p>
+              </div>
+            </div>
+          </div>
+        </FadeInSection>
+
+        {/* Layout 5: Feature Steps style for Guest Management */}
+        <FadeInSection className="max-w-6xl mx-auto text-center !py-0 mb-32">
+          <div className="mb-16">
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-4">{t('feat_guest_title')}</h2>
+            <h3 className="text-xl font-bold text-live-red">{t('feat_guest_sub')}</h3>
+          </div>
+          
+          <div className="grid lg:grid-cols-12 gap-8 md:gap-12 text-center lg:text-left items-center">
+            <motion.div 
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="lg:col-span-5 bg-white/[0.02] backdrop-blur-2xl rounded-[2rem] p-8 md:p-10 h-full min-h-[300px] border border-white/[0.08] shadow-2xl relative overflow-hidden group flex flex-col justify-center items-center lg:items-start"
+            >
+               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-live-red/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+               <svg className="w-12 h-12 text-white/30 mb-6 md:mb-8 group-hover:text-live-red/80 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" /></svg>
+               <p className="text-lg md:text-xl lg:text-2xl text-white/80 font-medium leading-relaxed relative z-10">{t('feat_guest_desc')}</p>
+            </motion.div>
+            <motion.div 
+              whileHover={{ scale: 1.05 }}
+              className="lg:col-span-7 w-full flex justify-center lg:justify-end relative perspective-1000 mt-4 lg:mt-0"
+            >
+               <img 
+                 src="/images/guestmanage.png" 
+                 alt={t('feat_guest_title')}
+                 className="w-full max-w-[280px] md:max-w-md lg:max-w-2xl max-h-[400px] lg:max-h-[550px] xl:max-h-[650px] object-contain rounded-[2rem] border border-white/5 drop-shadow-[0_20px_60px_rgba(0,0,0,0.8)] xl:scale-105" 
+               />
+            </motion.div>
+          </div>
+        </FadeInSection>
+
         {/* Layout 1: Left/Right Standard for Promoter Management */}
         <FadeInSection className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 relative">
           <div className="flex-1 space-y-4 md:space-y-6 flex flex-col items-center lg:items-start text-center lg:text-left mx-auto">
@@ -90,62 +144,6 @@ export function FeatureHighlightsSection() {
             </div>
           </motion.div>
         </FadeInSection>
-
-        {/* Layout 4: Dark Glass Panel for Analytics Dashboard */}
-        <FadeInSection className="relative w-full overflow-hidden !py-16 md:!py-24 border-y border-white/5 bg-[#09090B] mt-24 md:mt-32">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(242,253,10,0.03),transparent_50%)] mix-blend-screen pointer-events-none" />
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 relative z-10 max-w-7xl mx-auto px-6">
-            <motion.div 
-              whileHover={{ rotateY: 5, scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 200 }}
-              className="flex-1 w-full flex justify-center order-last lg:order-first perspective-1000"
-            >
-              <img 
-                src="/images/analytics.png" 
-                alt={t('feat_analytics_title')}
-                className="max-w-full w-auto max-h-[350px] md:max-h-[500px] rounded-[2rem] border border-white/5 drop-shadow-[0_20px_60px_rgba(0,0,0,0.8)]" 
-              />
-            </motion.div>
-            <div className="flex-1 space-y-4 md:space-y-6 flex flex-col items-center lg:items-start text-center lg:text-left order-first lg:order-last">
-              <h2 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter mb-2 md:mb-6">{t('feat_analytics_title')}</h2>
-              <div className="space-y-4 border-l-0 lg:border-l-2 border-live-red/60 pl-0 lg:pl-6 py-2 my-4 md:my-8 relative">
-                <div className="hidden lg:block absolute top-0 -left-px w-0.5 h-1/2 bg-live-red shadow-[0_0_10px_rgba(255,72,72,0.8)]" />
-                <h3 className="text-xl font-bold text-white">{t('feat_analytics_sub')}</h3>
-                <p className="text-base md:text-lg text-white/60 leading-relaxed max-w-xl mx-auto lg:mx-0">{t('feat_analytics_desc')}</p>
-              </div>
-            </div>
-          </div>
-        </FadeInSection>
-
-        {/* Layout 5: Feature Steps style for Guest Management */}
-        <FadeInSection className="max-w-6xl mx-auto text-center !py-0 mb-32">
-          <div className="mb-16">
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-4">{t('feat_guest_title')}</h2>
-            <h3 className="text-xl font-bold text-live-red">{t('feat_guest_sub')}</h3>
-          </div>
-          
-          <div className="grid lg:grid-cols-12 gap-8 md:gap-12 text-center lg:text-left items-center">
-            <motion.div 
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="lg:col-span-5 bg-white/[0.02] backdrop-blur-2xl rounded-[2rem] p-8 md:p-10 h-full min-h-[300px] border border-white/[0.08] shadow-2xl relative overflow-hidden group flex flex-col justify-center items-center lg:items-start"
-            >
-               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-live-red/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-               <svg className="w-12 h-12 text-white/30 mb-6 md:mb-8 group-hover:text-live-red/80 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" /></svg>
-               <p className="text-lg md:text-xl lg:text-2xl text-white/80 font-medium leading-relaxed relative z-10">{t('feat_guest_desc')}</p>
-            </motion.div>
-            <motion.div 
-              whileHover={{ scale: 1.05 }}
-              className="lg:col-span-7 w-full flex justify-center lg:justify-end relative perspective-1000 mt-4 lg:mt-0"
-            >
-               <img 
-                 src="/images/guestmanage.png" 
-                 alt={t('feat_guest_title')}
-                 className="w-full max-w-[280px] md:max-w-md lg:max-w-2xl max-h-[400px] lg:max-h-[550px] xl:max-h-[650px] object-contain rounded-[2rem] border border-white/5 drop-shadow-[0_20px_60px_rgba(0,0,0,0.8)] xl:scale-105" 
-               />
-            </motion.div>
-          </div>
-        </FadeInSection>
-        
       </div>
     </>
   );
