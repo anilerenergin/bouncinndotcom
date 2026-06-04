@@ -8,7 +8,6 @@ import { RealTimeContextSection } from '@/components/sections/RealTimeContextSec
 import { AppPromotionsSection } from '@/components/sections/AppPromotionsSection';
 import { ManifestoSection } from '@/components/sections/ManifestoSection';
 import { FeatureHighlightsSection } from '@/components/sections/FeatureHighlightsSection';
-import { SecuritySection } from '@/components/sections/SecuritySection';
 import { CtaFooterSection } from '@/components/sections/CtaFooterSection';
 
 export default function HomePage() {
@@ -56,7 +55,6 @@ export default function HomePage() {
 
       <div id="crm">
         <FeatureHighlightsSection />
-        <SecuritySection />
       </div>
 
       <CtaFooterSection />

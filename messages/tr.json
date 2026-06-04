@@ -42,11 +42,6 @@
     "feat_guest_sub": "Mekanlar için akıllı liste ve check-in çözümü",
     "feat_guest_desc": "PR kanallarından tonla veri topluyorsunuz ama bunları uygulanabilir stratejilere çevirmekte zorlanıyorsunuz. Biz bunu kolaylaştırıyoruz.",
 
-    "security_title": "Güvenlik, kontrol ve ölçeklenebilirlik ön planda",
-    "security_1": "%100 özel mekan veri tabanı",
-    "security_2": "White-label ve API entegrasyonları",
-    "security_3": "Güvenli ve güçlü altyapı",
-
     "cta_lets": "Hadi Konuşalım",
     "cta_desc": "Bir mekanı yönetmek genellikle aynı anda on işi birden yapmak gibidir. Şu anda verileriniz ve operasyonlarınız her yere dağılmış durumda; işte tam da bu noktada para kaybediyorsunuz. Bouncinn'in son teknoloji CRM sistemini ve gece hayatı ağını işletmenize entegre etmek için buradayız.",
 
