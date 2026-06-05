@@ -74,7 +74,8 @@ export function SiteShell({ children }: { children: ReactNode }) {
 
             <details className="group relative text-xs font-bold tracking-wide text-white/70">
               <summary className="flex h-10 cursor-pointer list-none items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-3 transition-colors hover:border-white/25 [&::-webkit-details-marker]:hidden">
-                <Languages className="h-4 w-4 text-white/45" aria-hidden="true" />
+                <Languages className="hidden h-4 w-4 text-white/45 sm:block" aria-hidden="true" />
+                <span className="text-white sm:hidden">{locale.toUpperCase()}</span>
                 <span className="hidden text-left sm:inline">
                   {LANGUAGE_OPTIONS.find((language) => language.code === locale)?.label || locale}
                 </span>

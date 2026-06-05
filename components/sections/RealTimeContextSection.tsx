@@ -3,7 +3,6 @@
 import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { FadeInSection } from '@/components/ui/FadeInSection';
-import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder';
 
 export function RealTimeContextSection() {
   const t = useTranslations('Index');
@@ -26,7 +25,7 @@ export function RealTimeContextSection() {
         <img 
           src="/images/realtime.png" 
           alt="Real-Time Context" 
-          className="w-full max-w-[280px] md:max-w-[320px] object-contain rounded-[1.5rem] drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)] lg:mr-10" 
+          className="w-full max-w-[260px] md:max-w-[240px] lg:max-w-[260px] object-contain rounded-[1.5rem] drop-shadow-[0_20px_50px_rgba(0,0,0,0.8)] lg:mr-10" 
         />
       </motion.div>
     </FadeInSection>

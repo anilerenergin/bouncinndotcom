@@ -43,19 +43,19 @@ export function HowItWorksSection() {
         <div 
           ref={scrollRef}
           onScroll={handleScroll}
-          className="flex md:grid md:grid-cols-3 gap-4 md:gap-12 overflow-x-auto snap-x snap-mandatory scroll-px-[16vw] md:scroll-px-0 pt-1 md:pt-4 pb-4 md:pb-0 px-[16vw] md:px-0 -mx-4 md:mx-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] relative z-10 w-[calc(100%+2rem)] md:w-full"
+          className="flex md:grid md:grid-cols-3 gap-4 md:gap-8 overflow-x-auto snap-x snap-mandatory scroll-px-[16vw] md:scroll-px-0 pt-1 md:pt-4 pb-4 md:pb-0 px-[16vw] md:px-0 -mx-4 md:mx-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] relative z-10 w-[calc(100%+2rem)] md:w-full"
         >
           {[t('how_step1'), t('how_step2'), t('how_step3')].map((step, idx) => (
             <motion.div 
               key={idx} 
               whileHover={{ y: -10 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
-              className="min-w-[68vw] sm:min-w-[300px] md:min-w-0 snap-center flex flex-col items-center justify-center gap-4 md:gap-8 bg-transparent md:bg-white/[0.03] p-2 md:p-6 lg:p-8 rounded-none md:rounded-[2.5rem] border border-transparent md:border-white/[0.05] md:shadow-xl md:hover:bg-white/[0.06] md:hover:border-white/20 transition-colors"
+              className="min-w-[68vw] sm:min-w-[300px] md:min-w-0 snap-center flex flex-col items-center justify-center gap-4 md:gap-6 bg-transparent md:bg-white/[0.03] p-2 md:p-5 lg:p-6 rounded-none md:rounded-[2.5rem] border border-transparent md:border-white/[0.05] md:shadow-xl md:hover:bg-white/[0.06] md:hover:border-white/20 transition-colors"
             >
               <img 
                 src={`/images/${idx + 1}.png`} 
                 alt={step} 
-                className="h-[50vh] min-h-[300px] max-h-[430px] w-auto max-w-full md:h-auto md:min-h-0 md:max-h-none md:w-full md:max-w-[280px] object-contain rounded-[1rem] md:rounded-[1.5rem] drop-shadow-[0_16px_32px_rgba(0,0,0,0.55)]" 
+                className="h-[50vh] min-h-[300px] max-h-[430px] w-auto max-w-full md:h-auto md:min-h-0 md:max-h-none md:w-full md:max-w-[220px] lg:max-w-[240px] object-contain rounded-[1rem] md:rounded-[1.5rem] drop-shadow-[0_16px_32px_rgba(0,0,0,0.55)]" 
               />
               <h3 className="text-base md:text-xl font-bold text-white/90">{step}</h3>
             </motion.div>
