@@ -1,11 +1,18 @@
 {
   "Index": {
     "nav_app": "UYGULAMA",
+    "nav_home": "ANA SAYFA",
     "nav_crm": "BUSINESS",
     "nav_contact": "İLETİŞİM",
 
     "hero_title": "Bouncinn Nedir?",
     "hero_subtitle": "Bouncinn, aynı mekândaki insanların bağlantı kurmasını sağlayan etkinlik temelli bir sosyal uygulamadır. Ortak deneyimleri samimi bağlantılara dönüştürüyoruz.",
+    "download_title": "Bouncinn'i İndir",
+    "download_subtitle": "Geceyi yanında taşı. Etkinlik keşfi, check-in, eşleşmeler ve ödüller için uygulamayı indir.",
+    "download_app_store_overline": "İndirebileceğin yer",
+    "download_app_store": "App Store",
+    "download_play_store_overline": "Şuradan edin",
+    "download_play_store": "Google Play",
 
     "how_title": "Nasıl Çalışır?",
     "how_step1": "Etkinliğini Bul",

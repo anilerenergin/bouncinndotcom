@@ -1,0 +1,70 @@
+{
+  "Index": {
+    "nav_app": "APP",
+    "nav_home": "START",
+    "nav_crm": "BUSINESS",
+    "nav_contact": "KONTAKT",
+
+    "hero_title": "Was ist Bouncinn",
+    "hero_subtitle": "Bouncinn ist eine eventbasierte Social App, die dich mit Menschen im selben Raum verbindet und gemeinsame Orte in echte Begegnungen verwandelt.",
+    "download_title": "Bouncinn herunterladen",
+    "download_subtitle": "Nimm die Nacht mit. Hol dir die App fur Event-Discovery, Check-ins, Matches und Rewards.",
+    "download_app_store_overline": "Laden im",
+    "download_app_store": "App Store",
+    "download_play_store_overline": "Jetzt bei",
+    "download_play_store": "Google Play",
+
+    "how_title": "So funktioniert es",
+    "how_step1": "Finde dein Event",
+    "how_step2": "Checke ein",
+    "how_step3": "Lerne Menschen kennen",
+
+    "realtime_title": "Echtzeit-Kontext",
+    "realtime_desc": "Entdecke das Nachtleben, wahrend es passiert. Sieh, wer wo ist, finde die beste Stimmung und knupfe sofort Kontakte mit Menschen im selben Raum.",
+
+    "promo_app_title": "Exklusive Vorteile freischalten",
+    "promo_app_sub": "Deine Nacht, belohnt.",
+    "promo_app_desc": "Entdecke exklusive Promotions, Freigetranke und VIP-Zugang direkt in der Bouncinn App. Wahrend du zwischen den besten Locations unterwegs bist, wird deine Treue zu echten Vorteilen.",
+
+    "quote_text": "\"Digitales Dating ist kaputt: Wir sind erschopft vom endlosen Swipen und von der Leere zwischen Bildschirm und echter Welt.\"",
+    "quote_sub": "Wir bringen echte Verbindung zuruck.",
+
+    "feat_promoter_title": "Promoter-Management",
+    "feat_promoter_sub": "Promoter-Analysen in Echtzeit",
+    "feat_promoter_desc": "Optimiere deine PR-Strategie mit datenbasierten Einblicken, indem du in Echtzeit siehst, welcher Promoter wie viele Tickets verkauft oder wie viele Gaste gebracht hat.",
+
+    "feat_promo_title": "Promotion Engine",
+    "feat_promo_sub": "Direkte Kampagnen fur Konsumenten",
+    "feat_promo_desc": "Erreiche Endnutzer direkt mit wirkungsstarken mobilen Kampagnen und personalisierten Benachrichtigungen.",
+
+    "feat_target_title": "Prazises Targeting",
+    "feat_target_sub": "Zur richtigen Person, im richtigen Moment",
+    "feat_target_desc": "Definiere deine Zielgruppe mit integrierten PR- und Eventdaten. Erreiche die richtigen Menschen, nicht einfach nur mehr Menschen.",
+
+    "feat_analytics_title": "Analytics Dashboard",
+    "feat_analytics_sub": "Echtzeit-Einblicke fur das Wachstum deiner Location",
+    "feat_analytics_desc": "Nutze Daten, um Promotions, Preise und Kapazitat zu optimieren. Erkenne, wer deine Location besucht, welche demografischen Merkmale und Besuchsmuster es gibt, und verfolge Check-ins, Einlasse und Eventbeliebtheit in Echtzeit.",
+
+    "feat_guest_title": "Gaste-Management",
+    "feat_guest_sub": "Intelligente Gaste- und Check-in-Verwaltung fur Locations",
+    "feat_guest_desc": "Du sammelst riesige Datenmengen aus PR-Kanalen, hast aber Schwierigkeiten, daraus umsetzbare Strategien zu machen.",
+
+    "cta_lets": "Lass uns sprechen",
+    "cta_desc": "Eine Location zu fuhren fuhlt sich oft so an, als musste man zehn Dinge gleichzeitig im Blick behalten. Aktuell sind deine Daten und Ablaufe uberall verstreut, und genau dort verlierst du Geld. Wir helfen dir, Bouncinns modernes CRM und Nachtleben-Netzwerk in dein Business zu integrieren.",
+
+    "contact_name": "Name",
+    "contact_email": "E-Mail",
+    "contact_message": "Nachricht",
+    "contact_submit": "Senden",
+    "contact_success_title": "Nachricht gesendet!",
+    "contact_success_desc": "Wir melden uns in Kurze bei dir.",
+    "nav_legal": "Datenschutz & Rechtliches",
+    "legal_title": "Rechtliche Informationen",
+    "kvkk_title": "KVKK-Datenschutzhinweis",
+    "kvkk_content": "BOUNCINN KVKK-DATENSCHUTZHINWEIS\n\n1. Verantwortlicher\nGemaß dem turkischen Gesetz zum Schutz personenbezogener Daten Nr. 6698 (\"KVKK\") werden deine personenbezogenen Daten von Bouncinn Teknoloji A.S. (\"Bouncinn\") als Verantwortlichem verarbeitet.\n\n2. Begriff der Verarbeitung personenbezogener Daten\nIm Rahmen des KVKK umfasst die Verarbeitung personenbezogener Daten Vorgange wie Erheben, Speichern, Aufbewahren, Andern, Neuordnen, Offenlegen, Ubermitteln, Ubernehmen, Bereitstellen, Klassifizieren oder Verhindern der Nutzung personenbezogener Daten, ganz oder teilweise automatisiert oder nicht automatisiert, sofern sie Teil eines Datenerfassungssystems sind.\n\n3. Verarbeitete personenbezogene Daten\nVerarbeitet werden Identitats- und Kontaktdaten (Name, Nachname, E-Mail, Telefon), Nutzer- und Profildaten, Standort- und Eventdaten, Verhaltensdaten sowie technische Daten (IP, Gerateinformationen).\n\n4. Zwecke der Verarbeitung\nDaten werden verarbeitet, um Nutzerkonten zu erstellen, Matching-Dienste bereitzustellen, die Nutzererfahrung zu verbessern, Marketingaktivitaeten durchzufuhren, Sicherheit zu gewahrleisten und gesetzliche Pflichten zu erfullen.\n\n5. Ubermittlung personenbezogener Daten\nDeine personenbezogenen Daten konnen im Einklang mit dem KVKK an Geschaftspartner, Dienstleister und zustandige offentliche Stellen weitergegeben werden.\n\n6. Erhebungsmethode und Rechtsgrundlagen\nDaten werden uber die mobile App, die Webplattform und automatisierte Systeme erhoben. Die Verarbeitung basiert auf ausdrucklicher Einwilligung, Vertragen, gesetzlichen Pflichten und berechtigtem Interesse.\n\n7. Aufbewahrung und Loschung\nDeine personenbezogenen Daten werden fur den erforderlichen Zeitraum gespeichert und danach geloscht, vernichtet oder anonymisiert.\n\n8. Deine Rechte\nIm Rahmen des KVKK hast du Rechte wie Auskunft daruber, ob deine Daten verarbeitet werden, sowie Berichtigung, Loschung und Ersatz entstandener Schaden zu verlangen.\n\n9. Kontakt\nDu kannst deine Anfragen an kvkk@bouncinn.com senden.",
+    "community_title": "Community-Richtlinien",
+    "community_content": "BOUNCINN COMMUNITY-RICHTLINIEN\nLetzte Aktualisierung: 18. Marz 2026\n\nBouncinn ist eine Plattform, auf der Nutzer Events entdecken, neue Menschen kennenlernen und sozial interagieren konnen. Damit diese Erfahrung sicher und respektvoll bleibt, mussen alle Nutzer diese Richtlinien befolgen.\n\n1. Respektvolles Verhalten: Keine Beleidigungen, Belastigungen oder diskriminierenden Aussagen.\n2. Belastigung: Kein Spam, keine unerwunschten sexuellen Inhalte und kein Druck zu physischen Treffen.\n3. Fake-Accounts: Keine Nachahmung anderer Personen und keine automatisierten Bots.\n4. Unangemessene Inhalte: Keine Pornografie, Gewalt oder illegalen Promotions.\n5. Spam und Werbung: Keine unerlaubte Werbung oder kommerzielle Massenkommunikation.\n6. Sicherheitstipps: Triff dich an offentlichen Orten und schutze personliche Informationen.\n7. Melden: Melde beleidigende Nutzer oder Fake-Accounts.\n8. Beendigung: Konten, die gegen Regeln verstoßen, werden geschlossen.\n9. Sicherheit: Automatisierte Systeme analysieren Missbrauch.\n10. Aktualisierungen: Regeln konnen sofort aktualisiert werden.\n11. Kontakt: support@bouncinn.com",
+    "terms_title": "Nutzungsbedingungen",
+    "terms_content": "BOUNCINN NUTZUNGSBEDINGUNGEN\nLetzte Aktualisierung: 18. Marz 2026\n\n1. Zweck: Bouncinn bietet Dienste fur Event-Discovery, Check-in und soziales Matching.\n2. Nutzerkonto: Nutzer mussen korrekte Angaben machen und sind fur die Sicherheit ihres Kontos verantwortlich.\n3. Altersgrenze: Nutzer mussen mindestens 18 Jahre alt sein.\n4. Verhalten: Belastigung, illegale Nutzung und technische Angriffe sind verboten.\n5. Nutzerinhalte: Die Verantwortung liegt beim Nutzer; Rechtsverletzungen sind nicht erlaubt.\n6. Dienste: Umfasst Events, Matching, Messaging und gesponserte Inhalte.\n7. Premium: Kann In-App-Kaufe und Abonnements umfassen.\n8. Drittanbieter: Bedingungen von Drittanbietern gelten separat.\n9. Haftung: Bouncinn ist nicht fur Nutzerverhalten oder physische Treffen verantwortlich.\n10. Beendigung: Konten konnen bei Verstoßen gesperrt werden.\n11. Geistiges Eigentum: Alle Inhalte sind geschutzt.\n12. Anderungen: Bedingungen konnen jederzeit aktualisiert werden.\n13. Recht: Es gilt das Recht der Republik Turkei; Gerichte in Istanbul sind zustandig.\n14. Kontakt: support@bouncinn.com"
+  }
+}

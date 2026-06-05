@@ -7,11 +7,11 @@ export function ManifestoSection() {
   const t = useTranslations('Index');
 
   return (
-    <FadeInSection className="text-center !py-24 mt-8">
-      <h2 className="text-3xl md:text-5xl font-black tracking-tighter leading-tight max-w-4xl mx-auto mb-8">
+    <FadeInSection className="text-center !pt-8 !pb-10 md:!py-24 mt-0 md:mt-8">
+      <h2 className="text-lg sm:text-2xl md:text-5xl font-black tracking-normal md:tracking-tighter leading-snug md:leading-tight max-w-[18rem] sm:max-w-4xl mx-auto mb-5 md:mb-8">
         {t('quote_text')}
       </h2>
-      <p className="text-xl md:text-2xl font-bold text-live-red">
+      <p className="text-lg md:text-2xl font-bold text-live-red">
         {t('quote_sub')}
       </p>
     </FadeInSection>
