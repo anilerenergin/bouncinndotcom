@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLocale } from 'next-intl';
+import { getSiteCopy } from '@/lib/siteCopy';
 
 const footerLinks = [
   ['App', 'app'],
@@ -14,6 +15,14 @@ const footerLinks = [
 export function LandingFooter() {
   const locale = useLocale();
   const base = `/${locale}`;
+  const copy = getSiteCopy(locale);
+  const labels = {
+    app: copy.footer.app,
+    business: copy.footer.business,
+    about: copy.footer.about,
+    contact: copy.footer.contact,
+    legal: copy.footer.legal,
+  };
 
   return (
     <footer className="border-t border-white/10 px-4 py-10 sm:px-6 lg:px-8">
@@ -28,7 +37,7 @@ export function LandingFooter() {
         <nav className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-bold text-white/55">
           {footerLinks.map(([label, path]) => (
             <Link key={label} href={`${base}/${path}`} className="transition hover:text-white">
-              {label}
+              {labels[path]}
             </Link>
           ))}
         </nav>

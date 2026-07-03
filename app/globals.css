@@ -74,6 +74,23 @@
   .bouncinn-hero-perspective {
     perspective: 1400px;
   }
+
+  @media (max-width: 767px) {
+    .bouncinn-card-left,
+    .bouncinn-card-center,
+    .bouncinn-card-right {
+      animation: none;
+    }
+
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bouncinn-card-left,
+    .bouncinn-card-center,
+    .bouncinn-card-right {
+      animation: none;
+    }
+  }
 }
 
 @layer base {
@@ -123,5 +140,11 @@
   }
   body {
     @apply bg-background text-foreground antialiased;
+  }
+
+  @media (min-width: 1536px) {
+    html {
+      font-size: 16.5px;
+    }
   }
 }
