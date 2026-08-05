@@ -54,8 +54,6 @@ export default async function DownloadPage() {
               <div className="mt-7 flex flex-col items-center gap-3 px-1 opacity-0 animate-[fadeIn_1200ms_ease-out_forwards] sm:mt-8">
                 <a
                   href="https://apps.apple.com/us/app/bouncinn/id6759291367"
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="w-[200px] transition-transform duration-200 active:scale-95 hover:opacity-90"
                 >
                   <Image
@@ -68,8 +66,6 @@ export default async function DownloadPage() {
                 </a>
                 <a
                   href="https://play.google.com/store/apps/details?id=com.bouncinn.app&hl=tr"
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="w-[200px] transition-transform duration-200 active:scale-95 hover:opacity-90"
                 >
                   <Image
