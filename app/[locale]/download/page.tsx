@@ -29,7 +29,7 @@ export default function DownloadPage() {
         </p>
 
         <div className="flex flex-col w-full gap-4 pt-6 px-6 items-center">
-          <Link href="https://apps.apple.com/us/app/bouncinn/id6759291367" className="w-[200px] transition-transform active:scale-95 hover:opacity-90">
+          <a href="https://apps.apple.com/us/app/bouncinn/id6759291367" target="_blank" rel="noopener noreferrer" className="w-[200px] transition-transform active:scale-95 hover:opacity-90">
             <Image
               src="/images/app-store-badge.svg"
               alt="Download on the App Store"
@@ -37,8 +37,8 @@ export default function DownloadPage() {
               height={60}
               className="w-full h-auto"
             />
-          </Link>
-          <Link href="https://play.google.com/store/apps/details?id=com.bouncinn.app&hl=tr" className="w-[200px] transition-transform active:scale-95 hover:opacity-90">
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.bouncinn.app&hl=tr" target="_blank" rel="noopener noreferrer" className="w-[200px] transition-transform active:scale-95 hover:opacity-90">
             <Image
               src="/images/google-play-badge.svg"
               alt="Get it on Google Play"
@@ -46,7 +46,7 @@ export default function DownloadPage() {
               height={60}
               className="w-full h-auto"
             />
-          </Link>
+          </a>
         </div>
       </div>
 
