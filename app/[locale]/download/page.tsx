@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
+import { AppStoreLink } from "@/components/ui/AppStoreLink";
 
 export default async function DownloadPage() {
   const t = await getTranslations("Index");
@@ -52,18 +53,13 @@ export default async function DownloadPage() {
               </p>
 
               <div className="mt-7 flex flex-col items-center gap-3 px-1 opacity-0 animate-[fadeIn_1200ms_ease-out_forwards] sm:mt-8">
-                <a
-                  href="itms-apps://itunes.apple.com/app/id6759291367"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-[200px] transition-transform duration-200 active:scale-95 hover:opacity-90 flex justify-center"
-                >
+                <AppStoreLink className="w-[200px] transition-transform duration-200 active:scale-95 hover:opacity-90 flex justify-center">
                   <img
                     src="/images/app-store-badge.svg"
                     alt={t("download_page_apple_alt")}
                     className="h-auto w-full"
                   />
-                </a>
+                </AppStoreLink>
                 <a
                   href="https://play.google.com/store/apps/details?id=com.bouncinn.app&hl=tr"
                   target="_blank"

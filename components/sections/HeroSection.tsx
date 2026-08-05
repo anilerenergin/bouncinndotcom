@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { FadeInSection } from '@/components/ui/FadeInSection';
 import { motion } from 'framer-motion';
+import { AppStoreLink } from '@/components/ui/AppStoreLink';
 
 const APP_STORE_URL = 'https://apps.apple.com/us/app/bouncinn/id6759291367';
 const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.bouncinn.app';
@@ -23,11 +24,8 @@ export function HeroSection() {
           {t('hero_subtitle')}
         </p>
         <div className="flex flex-row flex-wrap gap-3 pt-3">
-          <a
-            href={APP_STORE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={t('download_app_store')}
+          <AppStoreLink
+            ariaLabel={t('download_app_store')}
             className="group inline-flex h-[46px] items-center justify-center transition-transform hover:-translate-y-0.5 active:translate-y-0 sm:h-[44px]"
           >
             <img
@@ -35,7 +33,7 @@ export function HeroSection() {
               alt="Download on the App Store"
               className="h-full w-auto"
             />
-          </a>
+          </AppStoreLink>
 
           <a
             href={PLAY_STORE_URL}
