@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
 export default async function DownloadPage() {
@@ -19,27 +18,25 @@ export default async function DownloadPage() {
           </p>
         </header>
 
-        <div className="flex flex-col w-full gap-4 pt-6 px-6 items-center">
-          <a href="https://apps.apple.com/us/app/bouncinn/id6759291367" target="_blank" rel="noopener noreferrer" className="w-[200px] transition-transform active:scale-95 hover:opacity-90">
-            <Image
-              src="/images/app-store-badge.svg"
-              alt="Download on the App Store"
-              width={200}
-              height={60}
-              className="w-full h-auto"
-            />
-          </a>
-          <a href="https://play.google.com/store/apps/details?id=com.bouncinn.app&hl=tr" target="_blank" rel="noopener noreferrer" className="w-[200px] transition-transform active:scale-95 hover:opacity-90">
-            <Image
-              src="/images/google-play-badge.svg"
-              alt="Get it on Google Play"
-              width={200}
-              height={60}
-              className="w-full h-auto"
-            />
-          </a>
-        </div>
-      </div>
+        <section className="flex w-full flex-1 flex-col items-center justify-center px-1 py-8 sm:py-10">
+          <div className="relative w-full max-w-sm overflow-hidden rounded-[2.3rem] border border-white/10 bg-black/20 p-6 shadow-[0_24px_80px_rgba(0,0,0,0.36)] backdrop-blur-[12px] backdrop-saturate-100 ring-1 ring-white/8 opacity-0 animate-[fadeIn_900ms_ease-out_forwards] sm:p-8">
+            <div className="absolute inset-0 animate-[pulse_10s_ease-in-out_infinite] bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.16),_transparent_58%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.08),_transparent_54%),linear-gradient(135deg,_rgba(255,255,255,0.04),_rgba(255,255,255,0.01))]" />
+            <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+            <div className="absolute inset-x-4 bottom-0 h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
+            <div className="relative z-10">
+              <div className="mb-5 flex justify-center">
+                <div className="flex h-28 w-28 items-center justify-center overflow-hidden rounded-[1.75rem] bg-[#ff3332] shadow-[0_22px_70px_rgba(255,51,50,0.4)] transition-transform duration-700 hover:scale-105 sm:h-32 sm:w-32">
+                  <Image
+                    src="/images/icon.png"
+                    alt="Bouncinn Logo"
+                    width={112}
+                    height={112}
+                    className="h-3/5 w-3/5 object-contain"
+                    priority
+                  />
+                </div>
+              </div>
 
               <div className="mb-4 flex flex-col items-center gap-2">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-white/50">
@@ -55,8 +52,10 @@ export default async function DownloadPage() {
               </p>
 
               <div className="mt-7 flex flex-col items-center gap-3 px-1 opacity-0 animate-[fadeIn_1200ms_ease-out_forwards] sm:mt-8">
-                <Link
+                <a
                   href="https://apps.apple.com/us/app/bouncinn/id6759291367"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-[200px] transition-transform duration-200 active:scale-95 hover:opacity-90"
                 >
                   <Image
@@ -66,9 +65,11 @@ export default async function DownloadPage() {
                     height={60}
                     className="h-auto w-full"
                   />
-                </Link>
-                <Link
+                </a>
+                <a
                   href="https://play.google.com/store/apps/details?id=com.bouncinn.app&hl=tr"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-[200px] transition-transform duration-200 active:scale-95 hover:opacity-90"
                 >
                   <Image
@@ -78,7 +79,7 @@ export default async function DownloadPage() {
                     height={60}
                     className="h-auto w-full"
                   />
-                </Link>
+                </a>
               </div>
             </div>
           </div>
