@@ -7,18 +7,20 @@ import { useState } from 'react';
 
 export default function LegalPage() {
   const t = useTranslations('Index');
-  const [activeTab, setActiveTab] = useState<'kvkk' | 'community' | 'terms'>('kvkk');
+  const [activeTab, setActiveTab] = useState<'kvkk' | 'community' | 'terms' | 'privacy'>('kvkk');
 
   const tabs = [
     { id: 'kvkk', label: t('kvkk_title') },
     { id: 'community', label: t('community_title') },
     { id: 'terms', label: t('terms_title') },
+    { id: 'privacy', label: t('privacy_title') },
   ] as const;
 
   const contentMap = {
     kvkk: t('kvkk_content'),
     community: t('community_content'),
     terms: t('terms_content'),
+    privacy: t('privacy_content'),
   };
 
   return (
