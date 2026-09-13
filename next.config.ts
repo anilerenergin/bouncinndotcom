@@ -14,6 +14,10 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'cdn.bugece.co',
       },
+      {
+        protocol: 'https',
+        hostname: 'supabase.bouncinn.com',
+      },
     ],
   },
 };
