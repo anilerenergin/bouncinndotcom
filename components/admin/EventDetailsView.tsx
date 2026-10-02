@@ -147,6 +147,10 @@ export default function EventDetailsView() {
                 <span className="font-bold">{event.capacity || 'Unlimited'}</span>
               </div>
               <div className="flex justify-between">
+                <span className="text-white/50">Importance Score</span>
+                <span className="font-bold">{event.importance ?? 0}</span>
+              </div>
+              <div className="flex justify-between">
                 <span className="text-white/50">Views</span>
                 <span className="flex items-center gap-1.5"><Eye className="size-3" /> {event.view_count || 0}</span>
               </div>

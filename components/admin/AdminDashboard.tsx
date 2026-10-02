@@ -5,7 +5,7 @@ import AdminLayout from '@/components/admin/AdminLayout';
 import { supabase } from '@/lib/supabase';
 import { 
   Users, Activity, UserPlus, Heart, MapPin, 
-  MessageSquare, Layers, Loader2, AlertTriangle 
+  MessageSquare, Layers, Loader2, AlertTriangle, XCircle
 } from 'lucide-react';
 
 interface Metrics {
@@ -27,6 +27,7 @@ interface Metrics {
   totalSold3m: number;
   totalSold1y: number;
   premiumRecurringUsers: number;
+  deletedAccounts: number;
 }
 
 export default function AdminDashboard() {
@@ -89,11 +90,12 @@ export default function AdminDashboard() {
         <MetricCard icon={<MapPin className="text-live-red" />} label="Real Life Matches" value={metrics.totalRealLifeMatches.toLocaleString()} />
         <MetricCard icon={<MessageSquare className="text-blue-400" />} label="Total Messages" value={metrics.totalMessages.toLocaleString()} />
         <MetricCard icon={<Layers className="text-purple-400" />} label="Total Swipes" value={metrics.totalSwipes.toLocaleString()} />
+        <MetricCard icon={<XCircle className="text-red-400" />} label="Deleted Accounts" value={metrics.deletedAccounts.toLocaleString()} />
       </div>
 
       <div className="mb-8">
         <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-white/60">Premium Subscriptions</h3>
-        <div className="grid gap-4 grid-cols-2 md:grid-cols-5">
+        <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 xl:grid-cols-5">
           <MetricCard icon={<Users className="text-yellow-400" />} label="Active Premium" value={metrics.activePremiumCount.toLocaleString()} />
           <MetricCard icon={<Activity className="text-green-400" />} label="Sold (1 Month)" value={metrics.totalSold1m.toLocaleString()} />
           <MetricCard icon={<Activity className="text-blue-400" />} label="Sold (3 Months)" value={metrics.totalSold3m.toLocaleString()} />

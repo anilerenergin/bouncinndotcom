@@ -7,9 +7,10 @@ import { useParams, useRouter } from 'next/navigation';
 import {
   Loader2, AlertTriangle, ArrowLeft, Calendar, 
   MapPin, Clock, ShieldCheck, CreditCard, 
-  Heart, CheckCircle2, User as UserIcon
+  Heart, CheckCircle2, User as UserIcon, ShieldBan, ShieldOff
 } from 'lucide-react';
 import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 
 export default function UserDetailsView() {
   const params = useParams();
@@ -20,6 +21,13 @@ export default function UserDetailsView() {
   const [data, setData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+
+  // Ban state
+  const [showBanModal, setShowBanModal] = useState(false);
+  const [banReason, setBanReason] = useState('');
+  const [isBanning, setIsBanning] = useState(false);
+  const [isUnbanning, setIsUnbanning] = useState(false);
+  const [banError, setBanError] = useState('');
 
   const fetchDetails = useCallback(async () => {
     setIsLoading(true);
@@ -115,6 +123,10 @@ export default function UserDetailsView() {
               <div className="flex justify-between">
                 <span className="text-white/50">Role</span>
                 <span className="font-bold">{profile.role}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-white/50">Email</span>
+                <span className="font-bold">{profile.email || <span className="italic text-white/40">Not provided</span>}</span>
               </div>
               <div className="h-px w-full bg-white/10 my-2"></div>
               <div className="flex justify-between">
@@ -269,6 +281,122 @@ export default function UserDetailsView() {
 
         </div>
       </div>
+
+      {/* Danger Zone */}
+      <div className="mt-8 rounded-xl border border-red-500/30 bg-red-950/20 p-6">
+        <h3 className="mb-1 text-sm font-bold uppercase tracking-wider text-red-400 flex items-center gap-2">
+          <ShieldBan className="size-4" /> Danger Zone
+        </h3>
+        <p className="mb-5 text-xs text-white/50">Actions here are irreversible or have significant consequences. Proceed with caution.</p>
+
+        {banError && (
+          <div className="mb-4 flex gap-2 rounded-lg border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-300">
+            <AlertTriangle className="mt-0.5 size-4 shrink-0" /><span>{banError}</span>
+          </div>
+        )}
+
+        {profile.status === 'banned' ? (
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-lg border border-red-500/20 bg-red-500/5">
+            <div>
+              <div className="font-bold text-red-400 flex items-center gap-2"><ShieldBan className="size-4" /> This user is currently banned</div>
+              <p className="text-xs text-white/50 mt-1">Unbanning will re-enable their account and allow them to log in again.</p>
+            </div>
+            <Button
+              onClick={async () => {
+                if (!confirm('Are you sure you want to unban this user?')) return;
+                setIsUnbanning(true);
+                setBanError('');
+                const { error: rpcErr } = await supabase.rpc('admin_unban_user', { p_user_id: userId });
+                if (rpcErr) { setBanError(rpcErr.message); setIsUnbanning(false); return; }
+                setIsUnbanning(false);
+                fetchDetails();
+              }}
+              disabled={isUnbanning}
+              className="shrink-0 bg-white/10 hover:bg-white/20 text-white gap-2"
+            >
+              {isUnbanning ? <Loader2 className="size-4 animate-spin" /> : <ShieldOff className="size-4" />}
+              Unban User
+            </Button>
+          </div>
+        ) : (
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-lg border border-red-500/20 bg-red-500/5">
+            <div>
+              <div className="font-bold text-sm">Ban User</div>
+              <p className="text-xs text-white/50 mt-1">Permanently bans this user, kicks active sessions, and sends a localized email notification.</p>
+            </div>
+            <Button
+              onClick={() => { setBanReason(''); setBanError(''); setShowBanModal(true); }}
+              className="shrink-0 bg-red-600 hover:bg-red-700 text-white gap-2"
+            >
+              <ShieldBan className="size-4" /> Ban User
+            </Button>
+          </div>
+        )}
+      </div>
+
+      {/* Ban Confirmation Modal */}
+      {showBanModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => setShowBanModal(false)}>
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+          <div className="relative w-full max-w-md rounded-2xl border border-red-500/30 bg-[#111114] p-6 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <div className="mb-4 flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-red-500/20">
+                <ShieldBan className="size-5 text-red-400" />
+              </div>
+              <div>
+                <h3 className="font-bold text-white">Ban {profile.first_name} {profile.last_name}?</h3>
+                <p className="text-xs text-white/50">@{profile.username}</p>
+              </div>
+            </div>
+
+            <p className="mb-4 text-sm text-white/70">This will immediately kick the user, delete their check-ins, matches, and favorites, and send them a ban notification email.</p>
+
+            <div className="mb-5">
+              <label className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-white/50">Ban Reason (English) *</label>
+              <textarea
+                value={banReason}
+                onChange={(e) => setBanReason(e.target.value)}
+                rows={4}
+                placeholder="e.g. Violation of Community Guidelines #1 and #2: Engaging in abusive language..."
+                className="w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-sm text-white placeholder:text-white/30 focus:border-red-500/60 focus:outline-none focus:ring-1 focus:ring-red-500/40 resize-none"
+              />
+              <p className="mt-1 text-xs text-white/40">The reason will be shown in all 4 supported languages (en, tr, de, nl) — enter in English and the same text will be used for other locales unless you customise.</p>
+            </div>
+
+            {banError && (
+              <div className="mb-4 flex gap-2 rounded-lg border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-300">
+                <AlertTriangle className="mt-0.5 size-4 shrink-0" /><span>{banError}</span>
+              </div>
+            )}
+
+            <div className="flex gap-3">
+              <Button variant="ghost" onClick={() => setShowBanModal(false)} className="flex-1 border border-white/10 hover:bg-white/10">
+                Cancel
+              </Button>
+              <Button
+                onClick={async () => {
+                  if (!banReason.trim()) { setBanError('Please enter a ban reason.'); return; }
+                  setIsBanning(true);
+                  setBanError('');
+                  const { error: rpcErr } = await supabase.rpc('admin_ban_user', {
+                    p_user_id: userId,
+                    p_reason_en: banReason.trim(),
+                  });
+                  setIsBanning(false);
+                  if (rpcErr) { setBanError(rpcErr.message); return; }
+                  setShowBanModal(false);
+                  fetchDetails();
+                }}
+                disabled={isBanning || !banReason.trim()}
+                className="flex-1 bg-red-600 hover:bg-red-700 text-white gap-2"
+              >
+                {isBanning ? <Loader2 className="size-4 animate-spin" /> : <ShieldBan className="size-4" />}
+                Confirm Ban
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </AdminLayout>
   );
 }

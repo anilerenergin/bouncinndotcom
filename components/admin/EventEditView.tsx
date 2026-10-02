@@ -23,6 +23,7 @@ interface EventForm {
   capacity: string;
   is_guest_open: boolean;
   show_about: boolean;
+  importance: string;
 }
 
 function toDatetimeLocal(iso: string | null): string {
@@ -40,7 +41,7 @@ export default function EventEditView() {
   const [form, setForm] = useState<EventForm>({
     title: '', about: '', address: '', cover_photo: '',
     starts_at: '', ends_at: '', prefers_groups: false,
-    ticket_url: '', capacity: '', is_guest_open: false, show_about: false,
+    ticket_url: '', capacity: '', is_guest_open: false, show_about: false, importance: '',
   });
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
@@ -72,6 +73,7 @@ export default function EventEditView() {
         capacity: ev.capacity?.toString() || '',
         is_guest_open: ev.is_guest_open ?? false,
         show_about: ev.show_about ?? false,
+        importance: ev.importance?.toString() || '0',
       });
     } catch (err: any) {
       setError(err.message || 'Failed to load event.');
@@ -107,6 +109,7 @@ export default function EventEditView() {
         p_capacity: form.capacity ? parseInt(form.capacity, 10) : null,
         p_is_guest_open: form.is_guest_open,
         p_show_about: form.show_about,
+        p_importance: form.importance ? parseInt(form.importance, 10) : 0,
       });
       
       if (rpcErr) throw rpcErr;
@@ -259,6 +262,17 @@ export default function EventEditView() {
                 onChange={(e) => handleChange('capacity', e.target.value)}
                 className="bg-black/40 border-white/10 focus-visible:ring-live-red/40 focus-visible:border-live-red/60"
                 placeholder="Leave empty for unlimited"
+              />
+            </div>
+
+            <div>
+              <label className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-white/50">Importance Score</label>
+              <Input
+                type="number"
+                value={form.importance}
+                onChange={(e) => handleChange('importance', e.target.value)}
+                className="bg-black/40 border-white/10 focus-visible:ring-live-red/40 focus-visible:border-live-red/60"
+                placeholder="0"
               />
             </div>
 
